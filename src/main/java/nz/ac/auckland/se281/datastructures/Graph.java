@@ -326,12 +326,19 @@ public class Graph<T extends Comparable<T>> {
 
       // look at all connect vertices to the current vertex and push onto the stack
       Set<T> neighbours = getNeighbours(currentVertex);
+
+      boolean foundUnvisitedNeighbour = false;
       for (T neighbour : neighbours) {
         if (!visited.contains(neighbour)) {
           stack.push(neighbour);
           visited.add(neighbour);
           result.add(neighbour);
+          foundUnvisitedNeighbour = true;
         }
+      }
+
+      if (!foundUnvisitedNeighbour) {
+        stack.pop();
       }
     }
 
