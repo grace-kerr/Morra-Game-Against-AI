@@ -257,13 +257,52 @@ public class Graph<T extends Comparable<T>> {
   }
 
   public List<T> iterativeBreadthFirstSearch() {
-    boolean[] visited = new boolean[V];
-    Queue<T> queue = new LinkedList<>();
+    Set<T> visited = new HashSet<>();
+    List<T> result = new ArrayList<>();
+    Queue<T> queue = new DLinkedList<>();
 
-    //
-    int start = getLowestRootValue();
+    // DNode<T> currentVertex = ;
 
-    throw new UnsupportedOperationException();
+    Set<T> roots = getRoots();
+    if (roots.isEmpty()) {
+      return result;
+    }
+
+    for (T root : roots) {
+      queue.enqueue(root);
+      visited.add(root);
+    }
+
+    while (!queue.isEmpty()) {
+      T currentVertex = queue.dequeue();
+      result.add(currentVertex);
+
+      // look at all connect vertices to the current vertex
+      Set<T> neighbours = getNeighbours(currentVertex);
+      for (T neighbour : neighbours) {
+        if (!visited.contains(neighbour)) {
+          queue.enqueue(neighbour);
+          visited.add(neighbour);
+        }
+      }
+    }
+  }
+
+  private Set<T> getNeighbors(T vertex) {
+    Set<T> neighbors = new HashSet<>();
+
+    // look at all edges and add the destination of the edge if the source is the vertex inputted
+    for (Edge<T> edge : edges) {
+      if (edge.getSource().equals(vertex)) {
+        neighbors.add(edge.getDestination());
+      }
+    }
+
+    return neighbors;
+  }
+
+  private Exception IllegalStateException(String string) {
+    return null;
   }
 
   public List<T> iterativeDepthFirstSearch() {
