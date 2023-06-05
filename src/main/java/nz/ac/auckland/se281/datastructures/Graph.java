@@ -50,47 +50,86 @@ public class Graph<T extends Comparable<T>> {
   // }
 
   public Set<T> getRoots() {
-    // Set<T> roots = new LinkedHashSet<>();
+    Set<T> roots = new HashSet<>();
 
-    // for (Map.Entry<T, LinkedList<Edge<T>>> entry : adjacencyMap.entrySet()) {
-    //   T vertex = entry.getKey();
-    //   LinkedList<Edge<T>> edges = entry.getValue();
+    // finding nodes with in-degree 0 and out-degree > 0
+    for (T vertex : vertices) {
+      if (getInDegree(vertex) == 0 && getInDegree(vertex) > 0) {
+        roots.add(vertex);
+      }
+    }
 
-    //   boolean hasOutgoingEdges = false;
+    // findinf nodes that are part of an equivalence class
+    for (T vertex : vertices) {
+      Set<T> equivalenceClass = getEquivalenceClass(vertex);
+      if (equivalenceClass.size() > 1) {
+        T minimumValueNode = findMinimumValueNode(equivalenceClass);
+        roots.add(minimumValueNode);
+      }
+    }
 
-    //   for (Edge<T> edge : edges) {
-    //     if (edge.getSource().equals(vertex)) {
-    //       hasOutgoingEdges = true;
-    //       break;
-    //     }
-    //   }
-
-    //   if (!hasOutgoingEdges) {
-    //     // Vertex has no outgoing edges
-    //     continue;
-    //   }
-
-    //   boolean hasIncomingEdges = false;
-
-    //   for (LinkedList<Edge<T>> otherEdges : adjacencyMap.values()) {
-    //     for (Edge<T> edge : otherEdges) {
-    //       if (edge.getDestination().equals(vertex) && !edge.getSource().equals(vertex)) {
-    //         hasIncomingEdges = true;
-    //         break;
-    //       }
-    //     }
-    //     if (hasIncomingEdges) {
-    //       break;
-    //     }
-    //   }
-
-    //   if (hasIncomingEdges) {
-    //     // Vertex has at least 1 incoming edge and 1 outgoing edge
-    //     // Do something with the vertex
-    //   }
-    // }
-    throw new UnsupportedOperationException();
+    return roots;
   }
+
+  private int getInDegree(T vertex) {
+    int inDegree = 0;
+
+    for (Edge<T> edge : edges) {
+      T destination = edge.getDestination();
+      if (destination.equals(vertex)) {
+        inDegree++;
+      }
+    }
+
+    return inDegree;
+  }
+
+  private T findMinimumValueNode(Set<T> equivalenceClass) {
+    return equivalenceClass.stream().min(Comparator.naturalOrder()).orElse(null);
+  }
+
+  // public Set<T> getRoots() {
+  // Set<T> roots = new LinkedHashSet<>();
+
+  // for (Map.Entry<T, LinkedList<Edge<T>>> entry : adjacencyMap.entrySet()) {
+  //   T vertex = entry.getKey();
+  //   LinkedList<Edge<T>> edges = entry.getValue();
+
+  //   boolean hasOutgoingEdges = false;
+
+  //   for (Edge<T> edge : edges) {
+  //     if (edge.getSource().equals(vertex)) {
+  //       hasOutgoingEdges = true;
+  //       break;
+  //     }
+  //   }
+
+  //   if (!hasOutgoingEdges) {
+  //     // Vertex has no outgoing edges
+  //     continue;
+  //   }
+
+  //   boolean hasIncomingEdges = false;
+
+  //   for (LinkedList<Edge<T>> otherEdges : adjacencyMap.values()) {
+  //     for (Edge<T> edge : otherEdges) {
+  //       if (edge.getDestination().equals(vertex) && !edge.getSource().equals(vertex)) {
+  //         hasIncomingEdges = true;
+  //         break;
+  //       }
+  //     }
+  //     if (hasIncomingEdges) {
+  //       break;
+  //     }
+  //   }
+
+  //   if (hasIncomingEdges) {
+  //     // Vertex has at least 1 incoming edge and 1 outgoing edge
+  //     // Do something with the vertex
+  //   //   }
+  //   // }
+  //   throw new UnsupportedOperationException();
+  // }
 
   public boolean isReflexive() {
     for (T vertex : vertices) {
