@@ -163,6 +163,7 @@ public class Graph<T extends Comparable<T>> {
   }
 
   public boolean isTransitive() {
+    // iterate through all edges
     for (Edge<T> edge1 : edges) {
       T source1 = edge1.getSource();
       T destination1 = edge1.getDestination();
@@ -171,6 +172,7 @@ public class Graph<T extends Comparable<T>> {
         T source2 = edge2.getSource();
         T destination2 = edge2.getDestination();
 
+        // return false if (v1,v2)∈E and (v2,v3)∈E hold, but (v1,v3)∉E
         if (destination1.equals(source2)) {
           Edge<T> transitiveEdge = new Edge<>(source1, destination2);
           if (!isEdgeInSet(transitiveEdge, edges)) {
@@ -183,6 +185,7 @@ public class Graph<T extends Comparable<T>> {
   }
 
   public boolean isAntiSymmetric() {
+    // iterate through all edges
     for (Edge<T> edge1 : edges) {
       T source1 = edge1.getSource();
       T destination1 = edge1.getDestination();
@@ -191,6 +194,7 @@ public class Graph<T extends Comparable<T>> {
         T source2 = edge2.getSource();
         T destination2 = edge2.getDestination();
 
+        // return false if (v1,v2)∈E and (v2,v1)∈E hold, but the vertices are not the same
         if (destination1.equals(source2)
             && source1.equals(destination2)
             && !source1.equals(destination1)) {
@@ -208,9 +212,11 @@ public class Graph<T extends Comparable<T>> {
   public Set<T> getEquivalenceClass(T vertex) {
     Set<T> equivalenceClass = new HashSet<>();
 
+    // only assess equivalence class, if graph is an equivalence relation
     if (isEquivalence()) {
       equivalenceClass.add(vertex);
 
+      // add all vertices that are connected to the vertex
       for (Edge<T> edge : edges) {
         T source = edge.getSource();
         T destination = edge.getDestination();
