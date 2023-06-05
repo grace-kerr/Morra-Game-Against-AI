@@ -13,6 +13,8 @@ public class LinkedList<T> implements List<T> {
     head = null;
   }
 
+  // locate node should be a helper method to help with insert and delete
+
   // Key methods of the List interface
 
   /**

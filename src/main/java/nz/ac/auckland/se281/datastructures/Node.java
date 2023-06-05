@@ -3,6 +3,7 @@ package nz.ac.auckland.se281.datastructures;
 public class Node<T> {
   private T val;
   private Node<T> next;
+  private Node<T> prev;
 
   // constructor
 
@@ -11,7 +12,7 @@ public class Node<T> {
   public Node(T v) {
     val = v;
     this.next = null;
-    ;
+    this.prev = null;
   }
 
   public Node(T v, Node<T> next) {
