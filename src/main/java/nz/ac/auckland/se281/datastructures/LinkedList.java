@@ -153,4 +153,10 @@ public class LinkedList<T> implements List<T> {
   public boolean isEmpty() {
     return size == 0;
   }
+
+  @Override
+  public void append(T item) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'append'");
+  }
 }

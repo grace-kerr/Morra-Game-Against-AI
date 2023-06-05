@@ -6,11 +6,11 @@ package nz.ac.auckland.se281.datastructures;
  * @author Partha Roop
  */
 public interface List<T> {
-  public void append(T item);
+  public void add(T item);
 
   public void prepend(T item);
 
-  public T fetch(int pos) throws InvalidPositionException;
+  public T get(int pos) throws InvalidPositionException;
 
   public void insert(int pos, T data) throws InvalidPositionException;
 
