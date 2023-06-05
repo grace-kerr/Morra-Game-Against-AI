@@ -208,16 +208,18 @@ public class Graph<T extends Comparable<T>> {
   public Set<T> getEquivalenceClass(T vertex) {
     Set<T> equivalenceClass = new HashSet<>();
 
-    equivalenceClass.add(vertex);
+    if (isEquivalence()) {
+      equivalenceClass.add(vertex);
 
-    for (Edge<T> edge : edges) {
-      T source = edge.getSource();
-      T destination = edge.getDestination();
+      for (Edge<T> edge : edges) {
+        T source = edge.getSource();
+        T destination = edge.getDestination();
 
-      if (source.equals(vertex)) {
-        equivalenceClass.add(destination);
-      } else if (destination.equals(vertex)) {
-        equivalenceClass.add(source);
+        if (source.equals(vertex)) {
+          equivalenceClass.add(destination);
+        } else if (destination.equals(vertex)) {
+          equivalenceClass.add(source);
+        }
       }
     }
 
