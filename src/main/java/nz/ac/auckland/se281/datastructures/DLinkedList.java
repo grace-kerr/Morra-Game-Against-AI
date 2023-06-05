@@ -1,9 +1,9 @@
 package nz.ac.auckland.se281.datastructures;
 
-public class DoublyLinkedList<T> extends LinkedList<T> {
+public class DLinkedList<T> extends LinkedList<T> {
   private Node<T> tail;
 
-  public DoublyLinkedList() {
+  public DLinkedList() {
     super();
     this.tail = null;
   }
