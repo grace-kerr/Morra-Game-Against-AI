@@ -29,6 +29,17 @@ public class Graph<T extends Comparable<T>> {
 
   public Set<T> getRoots() {
 
+    for (T vertex : verticies){
+      boolean isRoot = true;
+      for (Edge<T> edge : edges){
+        if (edge.getDestination().equals(vertex)){
+          isRoot = false;
+        }
+      }
+      if (isRoot){
+        roots.add(vertex);
+      }
+    }
 
     throw new UnsupportedOperationException();
   }
