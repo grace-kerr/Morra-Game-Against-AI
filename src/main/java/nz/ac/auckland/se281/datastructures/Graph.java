@@ -110,6 +110,15 @@ public class Graph<T extends Comparable<T>> {
     return true;
   }
 
+  public boolean compareEdges(Edge<T> edge1, Edge<T> edge2) {
+    T source1 = edge1.getSource();
+    T destination1 = edge1.getDestination();
+    T source2 = edge2.getSource();
+    T destination2 = edge2.getDestination();
+
+    return source1.equals(source2) && destination1.equals(destination2);
+  }
+
   public boolean isSymmetric() {
     for (Edge<T> edge : edges) {
       T source = edge.getSource();
@@ -120,12 +129,22 @@ public class Graph<T extends Comparable<T>> {
         continue;
       }
 
-      // check if if the reverse edge exists
+      Edge<T> reverseEdge = new Edge<>(destination, source);
+
+      boolean reverseEdgeExists = false;
+
+      // Check if reverse edge exists
       for (Edge<T> testEdge : edges) {
-        if (testEdge.getSource().equals(destination) && testEdge.getDestination().equals(source)) {
-          // Reverse edge does not exist
-          return false;
+        if (compareEdges(testEdge, reverseEdge)) {
+          // Reverse edge exists
+          reverseEdgeExists = true;
+          break;
         }
+      }
+
+      // if reverse edge does not exist, graph is not symmetric
+      if (!reverseEdgeExists) {
+        return false;
       }
     }
 
