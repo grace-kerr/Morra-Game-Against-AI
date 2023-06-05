@@ -1,9 +1,9 @@
 package nz.ac.auckland.se281.datastructures;
 
 public class Node<T> {
-  private T value;
-  private Node<T> next;
-  private Node<T> prev;
+  protected T value;
+  protected Node<T> next;
+  protected Node<T> prev;
 
   // constructor
   public Node() {}

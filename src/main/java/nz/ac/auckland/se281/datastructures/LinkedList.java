@@ -7,8 +7,8 @@ package nz.ac.auckland.se281.datastructures;
  * @author Partha Roop
  */
 public class LinkedList<T> implements List<T> {
-  private Node<T> head;
-  private int size;
+  protected Node<T> head;
+  protected int size;
 
   public LinkedList() {
     this.head = null;
