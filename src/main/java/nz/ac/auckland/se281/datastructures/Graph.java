@@ -259,9 +259,7 @@ public class Graph<T extends Comparable<T>> {
   public List<T> iterativeBreadthFirstSearch() {
     Set<T> visited = new HashSet<>();
     List<T> result = new ArrayList<>();
-    Queue<T> queue = new DLinkedList<>();
-
-    // DNode<T> currentVertex = ;
+    Queue<T> queue = new Queue<>();
 
     Set<T> roots = getRoots();
     if (roots.isEmpty()) {
@@ -286,6 +284,8 @@ public class Graph<T extends Comparable<T>> {
         }
       }
     }
+
+    return result;
   }
 
   private Set<T> getNeighbours(T vertex) {
