@@ -1,32 +1,98 @@
 package nz.ac.auckland.se281.datastructures;
 
 public class DoublyLinkedList<T> extends LinkedList<T> {
-  private Node<T> head;
   private Node<T> tail;
 
   public DoublyLinkedList() {
     super();
+    this.tail = null;
   }
 
-  // public boolean isEmpty() {
-  //     // isEmpty implementation
-  // }
+  @Override
+  public void prepend(T data) {
+    Node<T> newNode = new Node<>(data);
+    if (isEmpty()) {
+      head = newNode;
+      tail = newNode;
+    } else {
+      newNode.setNext(head);
+      head.setPrev(newNode);
+      head = newNode;
+    }
+    size++;
+  }
 
-  // public void insertFront(int data) {
-  //     // Insert at the front implementation
-  // }
+  @Override
+  public void add(T data) {
+    Node<T> newNode = new Node<>(data);
+    if (isEmpty()) {
+      head = newNode;
+      tail = newNode;
+    } else {
+      newNode.setPrev(tail);
+      tail.setNext(newNode);
+      tail = newNode;
+    }
+    size++;
+  }
 
-  // public void insertBack(int data) {
-  //     // Insert at the back implementation
-  // }
+  @Override
+  public void insert(int index, T data) {
+    if (index < 0 || index > size) {
+      throw new IndexOutOfBoundsException("Invalid index");
+    }
 
-  // public void deleteFront() {
-  //     // Delete from the front implementation
-  // }
+    if (index == size) {
+      add(data);
+      return;
+    }
 
-  // public void deleteBack() {
-  //     // Delete from the back implementation
-  // }
+    Node<T> newNode = new Node<>(data);
+    if (index == 0) {
+      newNode.setNext(head);
+      head.setPrev(newNode);
+      head = newNode;
+    } else {
+      Node<T> current = head;
+      for (int i = 0; i < index - 1; i++) {
+        current = current.getNext();
+      }
+      newNode.setNext(current.getNext());
+      newNode.setPrev(current);
+      current.getNext().setPrev(newNode);
+      current.setNext(newNode);
+    }
 
-  // Other helper methods as needed
+    size++;
+  }
+
+  @Override
+  public void remove(int index) {
+    if (index < 0 || index >= size) {
+      throw new IndexOutOfBoundsException("Invalid index");
+    }
+
+    if (index == 0) {
+      head = head.getNext();
+      if (head != null) {
+        head.setPrev(null);
+      } else {
+        tail = null;
+      }
+    } else if (index == size - 1) {
+      tail = tail.getPrev();
+      tail.setNext(null);
+    } else {
+      Node<T> current = head;
+      for (int i = 0; i < index; i++) {
+        current = current.getNext();
+      }
+      Node<T> prevNode = current.getPrev();
+      Node<T> nextNode = current.getNext();
+      prevNode.setNext(nextNode);
+      nextNode.setPrev(prevNode);
+    }
+
+    size--;
+  }
 }
