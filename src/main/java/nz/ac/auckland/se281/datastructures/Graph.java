@@ -266,7 +266,9 @@ public class Graph<T extends Comparable<T>> {
       return result;
     }
 
-    for (T root : roots) {
+    List<T> orderedRoots = orderSet(roots);
+
+    for (T root : orderedRoots) {
       queue.enqueue(root);
       visited.add(root);
     }
@@ -302,47 +304,49 @@ public class Graph<T extends Comparable<T>> {
   }
 
   public List<T> iterativeDepthFirstSearch() {
-    Set<T> visited = new HashSet<>();
-    List<T> result = new ArrayList<>();
+    List<T> visited = new ArrayList<>();
+    //List<T> result = new ArrayList<>();
     Stack<T> stack = new Stack<>();
 
     Set<T> roots = getRoots();
     if (roots.isEmpty()) {
-      return result;
+      return visited;
     }
 
     List<T> orderedRoots = orderSet(roots);
 
-    // add all roots to the stack
     for (T root : orderedRoots) {
       stack.push(root);
-      visited.add(root);
-      result.add(root);
     }
 
+    T currentVertex = stack.peek();
+
     while (!stack.isEmpty()) {
-      T currentVertex = stack.pop();
-      result.add(currentVertex);
+      visited.add(currentVertex);
+      currentVertex = stack.pop();
 
-      // look at all connect vertices to the current vertex and push onto the stack
+
+
+      visited.add(currentVertex);
+
       Set<T> neighbours = getNeighbours(currentVertex);
-
       boolean foundUnvisitedNeighbour = false;
       for (T neighbour : neighbours) {
         if (!visited.contains(neighbour)) {
           stack.push(neighbour);
           visited.add(neighbour);
-          result.add(neighbour);
           foundUnvisitedNeighbour = true;
         }
       }
 
-      if (!foundUnvisitedNeighbour) {
-        stack.pop();
+      if (!foundUnvisitedNeighbour && !stack.isEmpty()) {
+        // No unvisited neighbour, backtrack to the previous vertex
+        T prevVertex = stack.peek();
+        visited.add(prevVertex);
       }
     }
 
-    return result;
+    return visited;
   }
 
   public List<T> recursiveBreadthFirstSearch() {
