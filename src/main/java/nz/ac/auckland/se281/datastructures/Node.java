@@ -1,22 +1,21 @@
 package nz.ac.auckland.se281.datastructures;
 
 public class Node<T> {
-  private T val;
+  private T value;
   private Node<T> next;
   private Node<T> prev;
 
   // constructor
-
   public Node() {}
 
-  public Node(T v) {
-    val = v;
+  public Node(T value) {
+    this.value = value;
     this.next = null;
     this.prev = null;
   }
 
-  public Node(T v, Node<T> next) {
-    val = v;
+  public Node(T value, Node<T> next) {
+    this.value = value;
     this.next = next;
   }
 
@@ -26,11 +25,28 @@ public class Node<T> {
     next = n;
   }
 
+  public void setValue(T value) {
+    this.value = value;
+  }
+
   public Node<T> getNext() {
     return next;
   }
 
   public T getValue() {
-    return val;
+    return value;
+  }
+
+  public Node<T> getPrev() {
+    return prev;
+  }
+
+  public void setPrev(Node<T> prev) {
+    this.prev = prev;
+  }
+
+  @Override
+  public String toString() {
+    return value.toString();
   }
 }
