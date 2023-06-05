@@ -241,8 +241,25 @@ public class Graph<T extends Comparable<T>> {
     return equivalenceClass;
   }
 
+  public int getLowestRootValue() {
+    Set<T> roots = getRoots();
+
+    // set the highest number, and lower it if a lower number is found
+    int lowestValue = Integer.MAX_VALUE;
+    for (T root : roots) {
+      int value = Integer.parseInt(root.toString());
+      if (value < lowestValue) {
+        lowestValue = value;
+      }
+    }
+
+    return lowestValue;
+  }
+
   public List<T> iterativeBreadthFirstSearch() {
-    // TODO: Task 2.
+
+    Queue<T> queue = new LinkedList<>();
+
     throw new UnsupportedOperationException();
   }
 
