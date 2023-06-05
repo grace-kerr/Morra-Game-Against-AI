@@ -288,17 +288,17 @@ public class Graph<T extends Comparable<T>> {
     }
   }
 
-  private Set<T> getNeighbors(T vertex) {
-    Set<T> neighbors = new HashSet<>();
+  private Set<T> getNeighbours(T vertex) {
+    Set<T> neighbours = new HashSet<>();
 
     // look at all edges and add the destination of the edge if the source is the vertex inputted
     for (Edge<T> edge : edges) {
       if (edge.getSource().equals(vertex)) {
-        neighbors.add(edge.getDestination());
+        neighbours.add(edge.getDestination());
       }
     }
 
-    return neighbors;
+    return neighbours;
   }
 
   private Exception IllegalStateException(String string) {
