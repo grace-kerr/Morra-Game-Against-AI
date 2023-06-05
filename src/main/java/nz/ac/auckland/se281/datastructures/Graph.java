@@ -301,10 +301,6 @@ public class Graph<T extends Comparable<T>> {
     return neighbours;
   }
 
-  private Exception IllegalStateException(String string) {
-    return null;
-  }
-
   public List<T> iterativeDepthFirstSearch() {
     // TODO: Task 2.
     throw new UnsupportedOperationException();
