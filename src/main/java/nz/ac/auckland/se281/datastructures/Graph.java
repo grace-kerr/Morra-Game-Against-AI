@@ -1,5 +1,6 @@
 package nz.ac.auckland.se281.datastructures;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -205,8 +206,22 @@ public class Graph<T extends Comparable<T>> {
   }
 
   public Set<T> getEquivalenceClass(T vertex) {
-    // TODO: Task 1.
-    throw new UnsupportedOperationException();
+    Set<T> equivalenceClass = new HashSet<>();
+
+    equivalenceClass.add(vertex);
+
+    for (Edge<T> edge : edges) {
+      T source = edge.getSource();
+      T destination = edge.getDestination();
+
+      if (source.equals(vertex)) {
+        equivalenceClass.add(destination);
+      } else if (destination.equals(vertex)) {
+        equivalenceClass.add(source);
+      }
+    }
+
+    return equivalenceClass;
   }
 
   public List<T> iterativeBreadthFirstSearch() {
