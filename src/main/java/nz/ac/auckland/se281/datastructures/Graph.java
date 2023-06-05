@@ -120,12 +120,16 @@ public class Graph<T extends Comparable<T>> {
         continue;
       }
 
-      Edge<T> reverseEdge = new Edge<>(destination, source);
-      if (!edges.contains(reverseEdge)) {
-        return false;
+      // check if if the reverse edge exists
+      for (Edge<T> testEdge : edges) {
+        if (testEdge.getSource().equals(destination) && testEdge.getDestination().equals(source)) {
+          // Reverse edge does not exist
+          return false;
+        }
       }
     }
 
+    // All edges are symmetric
     return true;
   }
 
