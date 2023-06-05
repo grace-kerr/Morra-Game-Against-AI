@@ -3,6 +3,9 @@ package nz.ac.auckland.se281.datastructures;
 import java.util.List;
 import java.util.Set;
 
+// This class declares the constructor and methods of a graph for the graph calculator to operate
+// on.
+
 /**
  * A graph that is composed of a set of verticies and edges.
  *
@@ -11,7 +14,17 @@ import java.util.Set;
  * @param <T> The type of each vertex, that have a total ordering.
  */
 public class Graph<T extends Comparable<T>> {
-  public Graph(Set<T> verticies, Set<Edge<T>> edges) {}
+
+  private Set<T> verticies;
+  private Set<Edge<T>> edges;
+  private Set<T> roots;
+
+  public Graph(Set<T> verticies, Set<Edge<T>> edges) {
+    // initialize the graph with the given verticies and edges
+    this.verticies = verticies;
+    this.edges = edges;
+    this.roots = new HashSet<>();
+  }
 
   public Set<T> getRoots() {
     // TODO: Task 1.
