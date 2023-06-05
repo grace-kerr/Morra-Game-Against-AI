@@ -1,7 +1,7 @@
 package nz.ac.auckland.se281.datastructures;
 
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -21,31 +21,57 @@ public class Graph<T extends Comparable<T>> {
   private Set<T> verticies;
   private Set<Edge<T>> edges;
   private Map<T, LinkedList<Edge<T>>> adjacencyMap;
-  private Set<T> roots;
+
+  // private Set<T> roots;
 
   public Graph(Set<T> verticies, Set<Edge<T>> edges) {
     // initialize the graph with the given verticies and edges
     this.verticies = verticies;
     this.edges = edges;
     adjacencyMap = new HashMap<T, LinkedList<Edge<T>>>();
-    this.roots = new HashSet<>();
+    // this.roots = new HashSet<>();
   }
 
   public Set<T> getRoots() {
+    Set<T> roots = new LinkedHashSet<>();
 
-    for (T vertex : verticies) {
-      boolean isRoot = true;
+    for (Map.Entry<T, LinkedList<Edge<T>>> entry : adjacencyMap.entrySet()) {
+      T vertex = entry.getKey();
+      LinkedList<Edge<T>> edges = entry.getValue();
+
+      boolean hasOutgoingEdges = false;
+
       for (Edge<T> edge : edges) {
-        if (edge.getDestination().equals(vertex)) {
-          isRoot = false;
+        if (edge.getSource().equals(vertex)) {
+          hasOutgoingEdges = true;
+          break;
         }
       }
-      if (isRoot) {
-        roots.add(vertex);
+
+      if (!hasOutgoingEdges) {
+        // Vertex has no outgoing edges
+        continue;
+      }
+
+      boolean hasIncomingEdges = false;
+
+      for (LinkedList<Edge<T>> otherEdges : adjacencyMap.values()) {
+        for (Edge<T> edge : otherEdges) {
+          if (edge.getDestination().equals(vertex) && !edge.getSource().equals(vertex)) {
+            hasIncomingEdges = true;
+            break;
+          }
+        }
+        if (hasIncomingEdges) {
+          break;
+        }
+      }
+
+      if (hasIncomingEdges) {
+        // Vertex has at least 1 incoming edge and 1 outgoing edge
+        // Do something with the vertex
       }
     }
-
-    throw new UnsupportedOperationException();
   }
 
   public boolean isReflexive() {
