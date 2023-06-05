@@ -45,18 +45,13 @@ public class Graph<T extends Comparable<T>> {
     Set<T> roots = new HashSet<>();
 
     for (T vertex : vertices) {
-      // finding roots with in-degree 0 and out-degree > 0
-      int s = getInDegree(vertex);
-      int v = getOutDegree(vertex);
-      System.out.println(s +v);
-
       if (getInDegree(vertex) == 0 && getOutDegree(vertex) > 0) {
         roots.add(vertex);
       }
 
       // find roots that are part of an equivalence class
-      Set<T> equivalenceClass = getEquivalenceClass(vertex);
-      if (equivalenceClass.size() > 1) {
+      if (!getEquivalenceClass(vertex).isEmpty()) {
+        Set<T> equivalenceClass = getEquivalenceClass(vertex);
         T minimumVertex = findMinimumVertex(equivalenceClass);
         roots.add(minimumVertex);
       }
@@ -109,6 +104,7 @@ public class Graph<T extends Comparable<T>> {
     for (T vertex : vertices) {
       boolean hasSelfLoop = false;
 
+      // check if vertex has a self loop
       for (Edge<T> edge : edges) {
         if (edge.getSource().equals(vertex) && edge.getDestination().equals(vertex)) {
           hasSelfLoop = true;
