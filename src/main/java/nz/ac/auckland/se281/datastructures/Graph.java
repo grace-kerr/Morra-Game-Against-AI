@@ -1,5 +1,7 @@
 package nz.ac.auckland.se281.datastructures;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -54,7 +56,7 @@ public class Graph<T extends Comparable<T>> {
 
     // finding nodes with in-degree 0 and out-degree > 0
     for (T vertex : vertices) {
-      if (getInDegree(vertex) == 0 && getInDegree(vertex) > 0) {
+      if (getInDegree(vertex) == 0 && getOutDegree(vertex) > 0) {
         roots.add(vertex);
       }
     }
@@ -63,8 +65,8 @@ public class Graph<T extends Comparable<T>> {
     for (T vertex : vertices) {
       Set<T> equivalenceClass = getEquivalenceClass(vertex);
       if (equivalenceClass.size() > 1) {
-        T minimumValueNode = findMinimumValueNode(equivalenceClass);
-        roots.add(minimumValueNode);
+        T minimumVertex = findMinimumVertex(equivalenceClass);
+        roots.add(minimumVertex);
       }
     }
 
@@ -84,8 +86,29 @@ public class Graph<T extends Comparable<T>> {
     return inDegree;
   }
 
-  private T findMinimumValueNode(Set<T> equivalenceClass) {
-    return equivalenceClass.stream().min(Comparator.naturalOrder()).orElse(null);
+  private int getOutDegree(T vertex) {
+    int outDegree = 0;
+
+    for (Edge<T> edge : edges) {
+      T source = edge.getSource();
+      if (source.equals(vertex)) {
+        outDegree++;
+      }
+    }
+
+    return outDegree;
+  }
+
+  private T findMinimumVertex(Set<T> equivalenceClass) {
+    ArrayList<T> orderedList = orderSet(equivalenceClass);
+    return orderedList.isEmpty() ? null : orderedList.get(0);
+  }
+
+  private ArrayList<T> orderSet(Set<T> unorderedSet) {
+    ArrayList<T> orderedList = new ArrayList<>(unorderedSet);
+    Collections.sort(orderedList);
+
+    return orderedList;
   }
 
   // public Set<T> getRoots() {
