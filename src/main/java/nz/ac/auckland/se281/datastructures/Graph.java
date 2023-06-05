@@ -41,28 +41,20 @@ public class Graph<T extends Comparable<T>> {
     // }
   }
 
-  // // a method to order a set of type T numerically
-  // public orderedSet<T> order(Set<T> set) {
-  //   orderedSet<T> orderedSet = new orderedSet<T>();
-  //   for (T element : set) {
-  //     int integer = Integer.parseInt(T.toString())
-  //     orderedSet.add(element);
-  //   }
-  //   return orderedSet;
-  // }
-
   public Set<T> getRoots() {
     Set<T> roots = new HashSet<>();
 
-    // finding nodes with in-degree 0 and out-degree > 0
     for (T vertex : vertices) {
+      // finding roots with in-degree 0 and out-degree > 0
+      int s = getInDegree(vertex);
+      int v = getOutDegree(vertex);
+      System.out.println(s +v);
+
       if (getInDegree(vertex) == 0 && getOutDegree(vertex) > 0) {
         roots.add(vertex);
       }
-    }
 
-    // findinf nodes that are part of an equivalence class
-    for (T vertex : vertices) {
+      // find roots that are part of an equivalence class
       Set<T> equivalenceClass = getEquivalenceClass(vertex);
       if (equivalenceClass.size() > 1) {
         T minimumVertex = findMinimumVertex(equivalenceClass);
@@ -76,6 +68,7 @@ public class Graph<T extends Comparable<T>> {
   private int getInDegree(T vertex) {
     int inDegree = 0;
 
+    // add to indegree count if vertex is a destination of an edge
     for (Edge<T> edge : edges) {
       T destination = edge.getDestination();
       if (destination.equals(vertex)) {
@@ -89,6 +82,7 @@ public class Graph<T extends Comparable<T>> {
   private int getOutDegree(T vertex) {
     int outDegree = 0;
 
+    // add to outdegree count if vertex is a source of an edge
     for (Edge<T> edge : edges) {
       T source = edge.getSource();
       if (source.equals(vertex)) {
@@ -110,49 +104,6 @@ public class Graph<T extends Comparable<T>> {
 
     return orderedList;
   }
-
-  // public Set<T> getRoots() {
-  // Set<T> roots = new LinkedHashSet<>();
-
-  // for (Map.Entry<T, LinkedList<Edge<T>>> entry : adjacencyMap.entrySet()) {
-  //   T vertex = entry.getKey();
-  //   LinkedList<Edge<T>> edges = entry.getValue();
-
-  //   boolean hasOutgoingEdges = false;
-
-  //   for (Edge<T> edge : edges) {
-  //     if (edge.getSource().equals(vertex)) {
-  //       hasOutgoingEdges = true;
-  //       break;
-  //     }
-  //   }
-
-  //   if (!hasOutgoingEdges) {
-  //     // Vertex has no outgoing edges
-  //     continue;
-  //   }
-
-  //   boolean hasIncomingEdges = false;
-
-  //   for (LinkedList<Edge<T>> otherEdges : adjacencyMap.values()) {
-  //     for (Edge<T> edge : otherEdges) {
-  //       if (edge.getDestination().equals(vertex) && !edge.getSource().equals(vertex)) {
-  //         hasIncomingEdges = true;
-  //         break;
-  //       }
-  //     }
-  //     if (hasIncomingEdges) {
-  //       break;
-  //     }
-  //   }
-
-  //   if (hasIncomingEdges) {
-  //     // Vertex has at least 1 incoming edge and 1 outgoing edge
-  //     // Do something with the vertex
-  //   //   }
-  //   // }
-  //   throw new UnsupportedOperationException();
-  // }
 
   public boolean isReflexive() {
     for (T vertex : vertices) {
