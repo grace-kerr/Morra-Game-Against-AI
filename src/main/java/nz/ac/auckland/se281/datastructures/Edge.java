@@ -16,8 +16,13 @@ public class Edge<T> {
     this.destination = destination;
   }
 
-  // getSource()
+  public T getSource() {
+    return source;
+  }
 
+  public T getDestination() {
+    return destination;
+  }
 }
 // This class declares the constructor and methods for an edge between a source vertex and a
 // destination vertex in the graph.
