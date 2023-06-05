@@ -1,24 +1,37 @@
 package nz.ac.auckland.se281.datastructures;
 
-public class Queue {
-    private DoublyLinkedList list;
+public class Queue<T> {
+  private DLinkedList<T> list;
 
-    public Queue() {
-        // Constructor implementation
+  public Queue() {
+    list = new DLinkedList<>();
+  }
+
+  public void enqueue(T data) {
+    list.add(data);
+  }
+
+  public T dequeue() {
+    if (isEmpty()) {
+      throw new IllegalStateException("Queue is empty");
     }
+    T data = list.get(0);
+    list.remove(0);
+    return data;
+  }
 
-    public boolean isEmpty() {
-        // isEmpty implementation
+  public T peek() {
+    if (isEmpty()) {
+      throw new IllegalStateException("Queue is empty");
     }
+    return list.get(0);
+  }
 
-    public void enqueue(int data) {
-        // Enqueue implementation using the doubly linked list
-    }
+  public int size() {
+    return list.size();
+  }
 
-    public void dequeue() {
-        // Dequeue implementation using the doubly linked list
-    }
-
-    // Other queue-related methods as needed
+  public boolean isEmpty() {
+    return list.isEmpty();
+  }
 }
-
