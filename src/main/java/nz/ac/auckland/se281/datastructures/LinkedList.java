@@ -45,7 +45,7 @@ public class LinkedList<T> implements List<T> {
    * @return the value at the position pos
    */
   public T fetch(int pos) throws InvalidPositionException {
-    T val = head.getValue();
+    //T val = head.getValue();
 
     throw new UnsupportedOperationException("Not supported yet.");
   }

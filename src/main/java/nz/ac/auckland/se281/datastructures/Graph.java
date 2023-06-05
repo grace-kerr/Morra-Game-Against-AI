@@ -1,8 +1,6 @@
 package nz.ac.auckland.se281.datastructures;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 // This class declares the constructor and methods of a graph for the graph calculator to operate
@@ -19,13 +17,14 @@ public class Graph<T extends Comparable<T>> {
 
   private Set<T> vertices;
   private Set<Edge<T>> edges;
-  private Map<T, LinkedList<Edge<T>>> adjacencyMap;
+
+  // private Map<T, LinkedList<Edge<T>>> adjacencyMap;
 
   public Graph(Set<T> verticies, Set<Edge<T>> edges) {
     // initialize the graph with the given verticies and edges
     this.vertices = verticies;
     this.edges = edges;
-    adjacencyMap = new HashMap<T, LinkedList<Edge<T>>>();
+    // adjacencyMap = new HashMap<T, LinkedList<Edge<T>>>();
 
     // // Initialize adjacency map with empty lists for each vertex
     // for (T vertex : vertices) {
@@ -38,6 +37,16 @@ public class Graph<T extends Comparable<T>> {
     //   adjacencyMap.get(source).add(edge);
     // }
   }
+
+  // // a method to order a set of type T numerically
+  // public orderedSet<T> order(Set<T> set) {
+  //   orderedSet<T> orderedSet = new orderedSet<T>();
+  //   for (T element : set) {
+  //     int integer = Integer.parseInt(T.toString())
+  //     orderedSet.add(element);
+  //   }
+  //   return orderedSet;
+  // }
 
   public Set<T> getRoots() {
     // Set<T> roots = new LinkedHashSet<>();
@@ -102,13 +111,42 @@ public class Graph<T extends Comparable<T>> {
   }
 
   public boolean isSymmetric() {
-    // TODO: Task 1.
-    throw new UnsupportedOperationException();
+    for (Edge<T> edge : edges) {
+      T source = edge.getSource();
+      T destination = edge.getDestination();
+
+      // Skip testing if source and destination are the same
+      if (source.equals(destination)) {
+        continue;
+      }
+
+      Edge<T> reverseEdge = new Edge<>(destination, source);
+      if (!edges.contains(reverseEdge)) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
   public boolean isTransitive() {
-    // TODO: Task 1.
-    throw new UnsupportedOperationException();
+    for (Edge<T> edge1 : edges) {
+      T v1 = edge1.getSource();
+      T v2 = edge1.getDestination();
+
+      for (Edge<T> edge2 : edges) {
+        T v3 = edge2.getDestination();
+
+        if (v2.equals(edge2.getSource())) {
+          Edge<T> transitiveEdge = new Edge<>(v1, v3);
+          if (!edges.contains(transitiveEdge)) {
+            return false;
+          }
+        }
+      }
+    }
+
+    return true;
   }
 
   public boolean isAntiSymmetric() {
