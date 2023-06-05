@@ -119,6 +119,15 @@ public class Graph<T extends Comparable<T>> {
     return source1.equals(source2) && destination1.equals(destination2);
   }
 
+  public boolean isEdgeInSet(Edge<T> edge, Set<Edge<T>> edgeSet) {
+    for (Edge<T> e : edgeSet) {
+      if (compareEdges(e, edge)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   public boolean isSymmetric() {
     for (Edge<T> edge : edges) {
       T source = edge.getSource();
@@ -154,21 +163,21 @@ public class Graph<T extends Comparable<T>> {
 
   public boolean isTransitive() {
     for (Edge<T> edge1 : edges) {
-      T v1 = edge1.getSource();
-      T v2 = edge1.getDestination();
+      T source1 = edge1.getSource();
+      T destination1 = edge1.getDestination();
 
       for (Edge<T> edge2 : edges) {
-        T v3 = edge2.getDestination();
+        T source2 = edge2.getSource();
+        T destination2 = edge2.getDestination();
 
-        if (v2.equals(edge2.getSource())) {
-          Edge<T> transitiveEdge = new Edge<>(v1, v3);
-          if (!edges.contains(transitiveEdge)) {
+        if (destination1.equals(source2)) {
+          Edge<T> transitiveEdge = new Edge<>(source1, destination2);
+          if (!isEdgeInSet(transitiveEdge, edges)) {
             return false;
           }
         }
       }
     }
-
     return true;
   }
 
