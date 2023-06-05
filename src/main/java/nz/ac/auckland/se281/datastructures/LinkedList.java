@@ -8,9 +8,11 @@ package nz.ac.auckland.se281.datastructures;
  */
 public class LinkedList<T> implements List<T> {
   private Node<T> head;
+  private int size;
 
   public LinkedList() {
-    head = null;
+    this.head = null;
+    this.size = 0;
   }
 
   // locate node should be a helper method to help with insert and delete
@@ -36,8 +38,21 @@ public class LinkedList<T> implements List<T> {
    * @param data: an integer, which is the value of the Node
    * @return void
    */
-  public void append(T data) {
-    throw new UnsupportedOperationException("Not supported yet.");
+  public void add(T data) {
+    Node<T> newNode = new Node<>(data);
+
+    if (isEmpty()) {
+      head = newNode;
+    } else {
+      Node<T> current = head;
+      while (current.getNext() != null) {
+        current = current.getNext();
+      }
+      current.setNext(newNode);
+      newNode.setPrev(current);
+    }
+
+    size++;
   }
 
   /**
@@ -46,10 +61,17 @@ public class LinkedList<T> implements List<T> {
    * @param pos: an integer, which is the position
    * @return the value at the position pos
    */
-  public T fetch(int pos) throws InvalidPositionException {
-    //T val = head.getValue();
+  public T get(int index) {
+    if (index < 0 || index >= size) {
+      throw new IndexOutOfBoundsException("Invalid index");
+    }
 
-    throw new UnsupportedOperationException("Not supported yet.");
+    Node<T> current = head;
+    for (int i = 0; i < index; i++) {
+      current = current.getNext();
+    }
+
+    return current.getValue();
   }
 
   /**
@@ -58,8 +80,33 @@ public class LinkedList<T> implements List<T> {
    * @param pos: an integer, which is the position
    * @return the value at the position pos
    */
-  public void insert(int pos, T data) throws InvalidPositionException {
-    throw new UnsupportedOperationException("Not supported yet.");
+  public void insert(int index, T data) {
+    if (index < 0 || index > size) {
+      throw new IndexOutOfBoundsException("Invalid index");
+    }
+
+    if (index == size) {
+      add(data);
+      return;
+    }
+
+    Node<T> newNode = new Node<>(data);
+    if (index == 0) {
+      newNode.setNext(head);
+      head.setPrev(newNode);
+      head = newNode;
+    } else {
+      Node<T> current = head;
+      for (int i = 0; i < index - 1; i++) {
+        current = current.getNext();
+      }
+      newNode.setNext(current.getNext());
+      newNode.setPrev(current);
+      current.getNext().setPrev(newNode);
+      current.setNext(newNode);
+    }
+
+    size++;
   }
 
   /**
@@ -68,8 +115,29 @@ public class LinkedList<T> implements List<T> {
    * @param pos: an integer, which is the position
    * @return void
    */
-  public void remove(int pos) throws InvalidPositionException {
-    throw new UnsupportedOperationException("Not supported yet.");
+  public void remove(int index) {
+    if (index < 0 || index >= size) {
+      throw new IndexOutOfBoundsException("Invalid index");
+    }
+
+    if (index == 0) {
+      head = head.getNext();
+      if (head != null) {
+        head.setPrev(null);
+      }
+    } else {
+      Node<T> current = head;
+      for (int i = 0; i < index - 1; i++) {
+        current = current.getNext();
+      }
+      Node<T> removedNode = current.getNext();
+      current.setNext(removedNode.getNext());
+      if (current.getNext() != null) {
+        current.getNext().setPrev(current);
+      }
+    }
+
+    size--;
   }
 
   /**
@@ -79,6 +147,10 @@ public class LinkedList<T> implements List<T> {
    * @return the size of the list
    */
   public int size() {
-    throw new UnsupportedOperationException("Not supported yet.");
+    return size;
+  }
+
+  public boolean isEmpty() {
+    return size == 0;
   }
 }
