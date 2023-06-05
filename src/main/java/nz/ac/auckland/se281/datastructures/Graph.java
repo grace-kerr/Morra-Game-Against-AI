@@ -1,7 +1,9 @@
 package nz.ac.auckland.se281.datastructures;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 // This class declares the constructor and methods of a graph for the graph calculator to operate
@@ -18,25 +20,27 @@ public class Graph<T extends Comparable<T>> {
 
   private Set<T> verticies;
   private Set<Edge<T>> edges;
+  private Map<T, LinkedList<Edge<T>>> adjacencyMap;
   private Set<T> roots;
 
   public Graph(Set<T> verticies, Set<Edge<T>> edges) {
     // initialize the graph with the given verticies and edges
     this.verticies = verticies;
     this.edges = edges;
+    adjacencyMap = new HashMap<T, LinkedList<Edge<T>>>();
     this.roots = new HashSet<>();
   }
 
   public Set<T> getRoots() {
 
-    for (T vertex : verticies){
+    for (T vertex : verticies) {
       boolean isRoot = true;
-      for (Edge<T> edge : edges){
-        if (edge.getDestination().equals(vertex)){
+      for (Edge<T> edge : edges) {
+        if (edge.getDestination().equals(vertex)) {
           isRoot = false;
         }
       }
-      if (isRoot){
+      if (isRoot) {
         roots.add(vertex);
       }
     }
