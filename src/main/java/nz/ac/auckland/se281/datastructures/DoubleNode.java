@@ -32,7 +32,7 @@ public class DoubleNode<T> extends Node<T> {
   }
 
   /**
-   * Returns the previous node.
+   * Returns the previous node. If the node is the head of the list, the previous node reference
    *
    * @return the previous node
    */

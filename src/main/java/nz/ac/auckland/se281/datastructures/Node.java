@@ -36,7 +36,7 @@ public class Node<T> {
   }
 
   /**
-   * Sets the next node.
+   * Sets the next node. If the node is the tail of the list, the next node will be null.
    *
    * @param n The node to be set as the next node.
    */

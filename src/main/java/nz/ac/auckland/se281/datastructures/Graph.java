@@ -21,19 +21,16 @@ public class Graph<T extends Comparable<T>> {
   private Set<T> vertices;
   private Set<Edge<T>> edges;
 
-  // private Map<T, LinkedList<Edge<T>>> adjacencyMap;
-
   /**
    * Constructs a graph with the given vertices and edges.
    *
    * @param vertices the set of vertices to initialise the graph with
    * @param edges the set of edges to initialise the graph with
    */
-  public Graph(Set<T> verticies, Set<Edge<T>> edges) {
+  public Graph(Set<T> vertices, Set<Edge<T>> edges) {
     // initialize the graph with the given verticies and edges
-    this.vertices = verticies;
+    this.vertices = vertices;
     this.edges = edges;
-    // adjacencyMap = new HashMap<T, LinkedList<Edge<T>>>();
   }
 
   /**
@@ -76,7 +73,7 @@ public class Graph<T extends Comparable<T>> {
    * ascending order.
    *
    * @param inputSet the set of elements to be ordered
-   * @return a  Set with the elements from the input set ordered by their integer values
+   * @return a Set with the elements from the input set ordered by their integer values
    */
   public Set<T> orderRoots(Set<T> inputSet) {
     List<T> tempList = new ArrayList<>(inputSet);
@@ -465,7 +462,7 @@ public class Graph<T extends Comparable<T>> {
       return visited;
     }
 
-    List<T> orderedRoots = orderSet(roots);
+    Set<T> orderedRoots = orderRoots(roots);
 
     for (T root : orderedRoots) {
       if (!visited.contains(root)) {
