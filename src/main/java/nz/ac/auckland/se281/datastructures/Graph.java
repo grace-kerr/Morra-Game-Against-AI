@@ -6,9 +6,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-// This class declares the constructor and methods of a graph for the graph calculator to operate
-// on.
-
 /**
  * A graph that is composed of a set of verticies and edges.
  *
@@ -382,7 +379,31 @@ public class Graph<T extends Comparable<T>> {
   }
 
   public List<T> recursiveDepthFirstSearch() {
-    // TODO: Task 3.
-    throw new UnsupportedOperationException();
+    List<T> visited = new ArrayList<>();
+    Set<T> roots = getRoots();
+    List<T> orderedRoots = orderSet(roots);
+
+    // Perform recursive depth-first search for each ordered root
+    for (T root : orderedRoots) {
+      if (!visited.contains(root)) {
+        recursiveDFS(root, visited);
+      }
+    }
+
+    return visited;
+  }
+
+  private void recursiveDFS(T vertex, List<T> visited) {
+    visited.add(vertex);
+
+    Set<T> neighbours = getNeighbours(vertex);
+    List<T> orderedNeighbours = orderSet(neighbours);
+
+    // Recursively look at the neighbours, ordered, of the current vertex
+    for (T neighbour : orderedNeighbours) {
+      if (!visited.contains(neighbour)) {
+        recursiveDFS(neighbour, visited);
+      }
+    }
   }
 }
