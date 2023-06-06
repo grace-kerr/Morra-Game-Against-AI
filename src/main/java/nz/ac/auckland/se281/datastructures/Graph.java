@@ -17,7 +17,6 @@ public class Graph<T extends Comparable<T>> {
 
   private Set<T> vertices;
   private Set<Edge<T>> edges;
-
   // private Map<T, LinkedList<Edge<T>>> adjacencyMap;
 
   /**
@@ -31,17 +30,6 @@ public class Graph<T extends Comparable<T>> {
     this.vertices = verticies;
     this.edges = edges;
     // adjacencyMap = new HashMap<T, LinkedList<Edge<T>>>();
-
-    // // Initialize adjacency map with empty lists for each vertex
-    // for (T vertex : vertices) {
-    //   adjacencyMap.put(vertex, new LinkedList<Edge<T>>());
-    // }
-
-    // // Populate adjacency map with edges
-    // for (Edge<T> edge : edges) {
-    //   T source = edge.getSource();
-    //   adjacencyMap.get(source).add(edge);
-    // }
   }
 
   /**
@@ -475,7 +463,7 @@ public class Graph<T extends Comparable<T>> {
         visited.add(root);
 
         // Recursive call to perform BFS traversal from the current root
-        recursiveBFS(queue, visited, result);
+        recursiveBreadthFirstSearch(queue, visited, result);
       }
     }
 
@@ -490,7 +478,7 @@ public class Graph<T extends Comparable<T>> {
    * @param result The list to store the traversed vertices in the order of traversal.
    * @param <T> The type of vertices being traversed.
    */
-  private void recursiveBFS(Queue<T> queue, Set<T> visited, List<T> result) {
+  private void recursiveBreadthFirstSearch(Queue<T> queue, Set<T> visited, List<T> result) {
     // The base case: If the queue is empty, the traversal is complete
     if (queue.isEmpty()) {
       return;
@@ -508,7 +496,7 @@ public class Graph<T extends Comparable<T>> {
     }
 
     // Recursive call to continue BFS on the remaining vertices in the queue
-    recursiveBFS(queue, visited, result);
+    recursiveBreadthFirstSearch(queue, visited, result);
   }
 
   /**
@@ -525,7 +513,7 @@ public class Graph<T extends Comparable<T>> {
     // Perform recursive depth-first search for each ordered root
     for (T root : orderedRoots) {
       if (!visited.contains(root)) {
-        recursiveDFS(root, visited);
+        recursiveDepthFirstSearch(root, visited);
       }
     }
 
@@ -539,7 +527,7 @@ public class Graph<T extends Comparable<T>> {
    * @param vertex The starting vertex for the DFS traversal.
    * @param visited The list to store the visited vertices in the order of traversal.
    */
-  private void recursiveDFS(T vertex, List<T> visited) {
+  private void recursiveDepthFirstSearch(T vertex, List<T> visited) {
     visited.add(vertex);
 
     Set<T> neighbours = getNeighbours(vertex);
@@ -548,7 +536,7 @@ public class Graph<T extends Comparable<T>> {
     // Recursively look at the neighbours, ordered, of the current vertex
     for (T neighbour : orderedNeighbours) {
       if (!visited.contains(neighbour)) {
-        recursiveDFS(neighbour, visited);
+        recursiveDepthFirstSearch(neighbour, visited);
       }
     }
   }

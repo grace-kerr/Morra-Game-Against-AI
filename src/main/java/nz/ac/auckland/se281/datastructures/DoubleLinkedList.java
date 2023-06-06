@@ -1,16 +1,16 @@
 package nz.ac.auckland.se281.datastructures;
 
-public class DLinkedList<T> extends LinkedList<T> {
+public class DoubleLinkedList<T> extends LinkedList<T> {
   private Node<T> tail;
 
-  public DLinkedList() {
+  public DoubleLinkedList() {
     super();
     this.tail = null;
   }
 
   @Override
   public void prepend(T data) {
-    DNode<T> newNode = new DNode<>(data);
+    DoubleNode<T> newNode = new DoubleNode<>(data);
     if (isEmpty()) {
       head = newNode;
       tail = newNode;
@@ -24,7 +24,7 @@ public class DLinkedList<T> extends LinkedList<T> {
 
   @Override
   public void add(T data) {
-    DNode<T> newNode = new DNode<>(data);
+    DoubleNode<T> newNode = new DoubleNode<>(data);
     if (isEmpty()) {
       head = newNode;
       tail = newNode;
@@ -47,7 +47,7 @@ public class DLinkedList<T> extends LinkedList<T> {
       return;
     }
 
-    DNode<T> newNode = new DNode<>(data);
+    DoubleNode<T> newNode = new DoubleNode<>(data);
     if (index == 0) {
       newNode.setNext(head);
       head.setPrev(newNode);

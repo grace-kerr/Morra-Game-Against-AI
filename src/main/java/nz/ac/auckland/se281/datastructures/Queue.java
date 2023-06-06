@@ -1,25 +1,39 @@
 package nz.ac.auckland.se281.datastructures;
 
 public class Queue<T> {
-  private DLinkedList<T> list;
+  private DoubleLinkedList<T> list;
 
   public Queue() {
-    list = new DLinkedList<>();
+    list = new DoubleLinkedList<>();
   }
 
   public void enqueue(T data) {
     list.add(data);
   }
 
+  /**
+   * This method removes and returns the element at the front of the queue.
+   *
+   * @return The element at the front of the queue, of tyep T.
+   * @throws IllegalStateException If the queue is empty.
+   */
   public T dequeue() {
     if (isEmpty()) {
       throw new IllegalStateException("Queue is empty");
     }
+
+    // Returns the element at the front of the queue after removing it from the queue
     T data = list.get(0);
     list.remove(0);
     return data;
   }
 
+  /**
+   * Finds and returns the element at the front of the queue. The element will not be removed.
+   *
+   * @return The element at the front of the queue, of type T.
+   * @throws IllegalStateException If the queue is empty.
+   */
   public T peek() {
     if (isEmpty()) {
       throw new IllegalStateException("Queue is empty");

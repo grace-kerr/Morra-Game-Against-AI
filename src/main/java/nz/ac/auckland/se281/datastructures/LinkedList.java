@@ -1,28 +1,25 @@
 package nz.ac.auckland.se281.datastructures;
 
 /**
- * The Linked List Class Has only one head pointer to the start node Nodes are indexed starting from
- * 0. List goes from 0 to size-1
+ * An implementation of the List interface using a linked list data structure. This LinkedList Class
+ * has only one head pointer to the start node.
  *
- * @author Partha Roop
+ * @param <T> The type of elements stored in the linked list.
  */
 public class LinkedList<T> implements List<T> {
   protected Node<T> head;
   protected int size;
 
+  /** Constructs an empty linked list. */
   public LinkedList() {
     this.head = null;
     this.size = 0;
   }
 
-  // locate node should be a helper method to help with insert and delete
-
-  // Key methods of the List interface
-
   /**
-   * This method adds a node with specified data as the start node of the list
+   * Adds a node with the inputted data at the beginning of the list.
    *
-   * @param data: an integer, which is the value of the Node
+   * @param data The data to be prepended, of type T.
    * @return void
    */
   public void prepend(T data) {
@@ -33,9 +30,9 @@ public class LinkedList<T> implements List<T> {
   }
 
   /**
-   * This method adds a node with specified data as the end node of the list
+   * Adds a new node with the inputted data to the end of the list.
    *
-   * @param data: an integer, which is the value of the Node
+   * @param data The data to be added, of type T.
    * @return void
    */
   public void add(T data) {
@@ -45,9 +42,13 @@ public class LinkedList<T> implements List<T> {
       head = newNode;
     } else {
       Node<T> current = head;
+
+      // Traverse till the last node in the list
       while (current.getNext() != null) {
         current = current.getNext();
       }
+
+      // Add the new node to the end of the list
       current.setNext(newNode);
       newNode.setPrev(current);
     }
@@ -56,10 +57,11 @@ public class LinkedList<T> implements List<T> {
   }
 
   /**
-   * This method fetches the value of a node at a given position
+   * This method will get the value at the inputted index in the list.
    *
-   * @param pos: an integer, which is the position
-   * @return the value at the position pos
+   * @param index The index of the value to get.
+   * @return The value at the inputted index.
+   * @throws IndexOutOfBoundsException If the index is out of bounds.
    */
   public T get(int index) {
     if (index < 0 || index > size) {
@@ -67,18 +69,24 @@ public class LinkedList<T> implements List<T> {
     }
 
     Node<T> current = head;
+
+    // Traverse to the node at the inputted index
     for (int i = 0; i < index; i++) {
       current = current.getNext();
     }
 
+    // Return the value of the current node
     return current.getValue();
   }
 
   /**
-   * This method fetches the value of a node at a given position
+   * This method inserts a new node at the specified index in the list. The value of the new node is
+   * set to the value passed in.
    *
-   * @param pos: an integer, which is the position
-   * @return the value at the position pos
+   * @param index The index at which the new node should be inserted.
+   * @param data The value to be inserted.
+   * @return void
+   * @throws IndexOutOfBoundsException If the index is out of bounds.
    */
   public void insert(int index, T data) {
     if (index < 0 || index > size) {
@@ -91,11 +99,13 @@ public class LinkedList<T> implements List<T> {
     }
 
     Node<T> newNode = new Node<>(data);
+    // Inserting at the beginning of the list
     if (index == 0) {
       newNode.setNext(head);
       head.setPrev(newNode);
       head = newNode;
     } else {
+      // Inserting value a position at any other place in the list
       Node<T> current = head;
       for (int i = 0; i < index - 1; i++) {
         current = current.getNext();
@@ -110,9 +120,9 @@ public class LinkedList<T> implements List<T> {
   }
 
   /**
-   * This method removes a node at a given position
+   * This method removes a node at a given position.
    *
-   * @param pos: an integer, which is the position
+   * @param index The index of the node that will be removed.
    * @return void
    */
   public void remove(int index) {
@@ -129,43 +139,22 @@ public class LinkedList<T> implements List<T> {
       // change its next pointer to skip past the offending node
       current.next = current.next.next;
     }
-
-
-    
-    // if (index < 0 || index > size) {
-    //   throw new IndexOutOfBoundsException("Invalid index");
-    // }
-
-    // if (index == 0) {
-    //   head = head.getNext();
-    //   if (head != null) {
-    //     head.setPrev(null);
-    //   }
-    // } else {
-    //   Node<T> current = head;
-    //   for (int i = 0; i < index - 1; i++) {
-    //     current = current.getNext();
-    //   }
-    //   Node<T> removedNode = current.getNext();
-    //   current.setNext(removedNode.getNext());
-    //   if (current.getNext() != null) {
-    //     current.getNext().setPrev(current);
-    //   }
-    // }
-
-    // size--;
   }
 
   /**
-   * This method returns the size of a list
+   * This method returns the size of a list.
    *
-   * @param
    * @return the size of the list
    */
   public int size() {
     return size;
   }
 
+  /**
+   * Checks if the list is empty.
+   *
+   * @return {@code true} if the list is empty, {@code false} otherwise.
+   */
   public boolean isEmpty() {
     return size == 0;
   }

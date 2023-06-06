@@ -52,13 +52,13 @@ public class LinkedStack<T> {
 
   // Returns a string representation of this stack.
   public String toString() {
-    String result = "";
+    StringBuilder result = new StringBuilder();
     ListNode<T> current = top;
     while (current != null) {
-      result = result + current.toString() + "\n";
+      result.append(current.toString()).append("\n");
       current = current.getNext();
     }
 
-    return result;
+    return result.toString();
   }
 }
