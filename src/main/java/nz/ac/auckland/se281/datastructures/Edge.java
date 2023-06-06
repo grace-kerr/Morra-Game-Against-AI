@@ -24,5 +24,3 @@ public class Edge<T> {
     return destination;
   }
 }
-// This class declares the constructor and methods for an edge between a source vertex and a
-// destination vertex in the graph.

@@ -61,46 +61,6 @@ public class DoubleLinkedList<T> extends LinkedList<T> {
   }
 
   /**
-   * Inserts an element at the specified index in the list.
-   *
-   * @param index the index at which to insert the element
-   * @param data the element to be inserted
-   * @throws IndexOutOfBoundsException if the index is out of range
-   */
-  @Override
-  public void insert(int index, T data) {
-    if (index < 0 || index > size) {
-      throw new IndexOutOfBoundsException("Invalid index");
-    }
-
-    // Inserting at the end of the list
-    if (index == size) {
-      add(data);
-      return;
-    }
-
-    Node<T> newNode = new Node<>(data);
-    // Inserting at the beginning of the list
-    if (index == 0) {
-      newNode.setNext(head);
-      head.setPrev(newNode);
-      head = newNode;
-    } else {
-      // Inserting in the middle of the list
-      Node<T> current = head;
-      for (int i = 0; i < index - 1; i++) {
-        current = current.getNext();
-      }
-      newNode.setNext(current.getNext());
-      newNode.setPrev(current);
-      current.getNext().setPrev(newNode);
-      current.setNext(newNode);
-    }
-
-    size++;
-  }
-
-  /**
    * Removes the element at the specified index from the list.
    *
    * @param index the index of the element to be removed

@@ -78,8 +78,8 @@ public class LinkedList<T> implements List<T> {
   }
 
   /**
-   * This method inserts a new node at the specified index in the list. The value of the new node is
-   * set to the value passed in.
+   * Inserts a new node at the inputted index in the list. The value of the new node is set to the
+   * inputted value passed in.
    *
    * @param index The index at which the new node should be inserted.
    * @param data The value to be inserted.

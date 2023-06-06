@@ -86,22 +86,6 @@ public class Graph<T extends Comparable<T>> {
     return new LinkedHashSet<>(tempList);
   }
 
-  // public Set<T> orderRoots(Set<T> inputSet) {
-  //   // Create a new set to store the ordered integers
-  //   Set<T> orderedSet = new TreeSet<>();
-  //   Set<Integer> tempSet = new TreeSet<>();
-
-  //   // Iterate over the input set and cast each element to int
-  //   for (T element : inputSet) {
-  //     intValue = Integer.parseInt(element.toString());
-  //     tempSet.add(intValue);
-  //   }
-
-  //   orderedSet = tempSet.sort();
-
-  //   return orderedSet;
-  // }
-
   /**
    * Orders the elements of the inputted set and returns them as an ArrayList.
    *
