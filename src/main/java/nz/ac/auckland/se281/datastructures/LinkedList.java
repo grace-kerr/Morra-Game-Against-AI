@@ -138,7 +138,7 @@ public class LinkedList<T> implements List<T> {
   }
 
   /**
-   * This method returns the size of a list.
+   * This method returns the size of a list. The size of a list is the number of nodes in the list.
    *
    * @return the size of the list
    */

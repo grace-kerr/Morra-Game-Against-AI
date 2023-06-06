@@ -1,9 +1,10 @@
 package nz.ac.auckland.se281.datastructures;
 
 /**
- * List Interface to be implemented by singly and Doubly Linked Lists
+ * A list interface. Lists typically allow elements to be added, inserted, and removed at different
+ * positions.
  *
- * @author Partha Roop
+ * @param <T> the type of elements in the list
  */
 public interface List<T> {
   public void add(T item);

@@ -2,7 +2,9 @@ package nz.ac.auckland.se281.datastructures;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -66,20 +68,48 @@ public class Graph<T extends Comparable<T>> {
     // sortedRootsSet.comparator();
     // T = (T)(Object)int
 
-    return roots;
-
-    // return new TreeSet<>(roots);
+    return orderRoots(roots);
   }
 
-  // public <T extends Comparable<T>> Set<Integer> orderSetToInt(Set<T> inputSet) {
-  //   // Create a new set to store the ordered integers
-  //   Set<Integer> orderedSet = new TreeSet<>();
+  /**
+   * Orders the elements in the input set based on their integer values. The input set is sorted in
+   * ascending order.
+   *
+   * @param inputSet the set of elements to be ordered
+   * @return a  Set with the elements from the input set ordered by their integer values
+   */
+  public Set<T> orderRoots(Set<T> inputSet) {
+    List<T> tempList = new ArrayList<>(inputSet);
+    Collections.sort(
+        tempList,
+        new Comparator<T>() {
 
-  //   // Iterate over the input set and cast each element to Integer
+          @Override
+          public int compare(T element1, T element2) {
+            // Convert elements to integers for comparison
+            int int1 = Integer.parseInt(element1.toString());
+            int int2 = Integer.parseInt(element2.toString());
+
+            // Compare the integer values
+            return Integer.compare(int1, int2);
+          }
+        });
+
+    return new LinkedHashSet<>(tempList);
+  }
+
+  // public Set<T> orderRoots(Set<T> inputSet) {
+  //   // Create a new set to store the ordered integers
+  //   Set<T> orderedSet = new TreeSet<>();
+  //   Set<Integer> tempSet = new TreeSet<>();
+
+  //   // Iterate over the input set and cast each element to int
   //   for (T element : inputSet) {
-  //     Integer intValue = (Integer) element;
-  //     orderedSet.add(intValue);
+  //     intValue = Integer.parseInt(element.toString());
+  //     tempSet.add(intValue);
   //   }
+
+  //   orderedSet = tempSet.sort();
 
   //   return orderedSet;
   // }

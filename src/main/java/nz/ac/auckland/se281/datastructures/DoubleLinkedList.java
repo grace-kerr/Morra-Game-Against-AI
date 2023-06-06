@@ -25,10 +25,14 @@ public class DoubleLinkedList<T> extends LinkedList<T> {
   public void prepend(T data) {
     DoubleNode<T> newNode = new DoubleNode<>(data);
     if (isEmpty()) {
+      // If the list is empty, set the new node as both the head and the tail
       head = newNode;
       tail = newNode;
     } else {
+      // Set the previous node of the current head as the new node
       newNode.setNext(head);
+
+      // Set the new node as the new head of the list
       head.setPrev(newNode);
       head = newNode;
     }

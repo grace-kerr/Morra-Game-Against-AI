@@ -72,7 +72,7 @@ public class Node<T> {
   }
 
   /**
-   * Returns the previous node.
+   * Returns the previous node. If the node is the head of the list, the previous node will be null.
    *
    * @return The previous node.
    */
@@ -81,7 +81,7 @@ public class Node<T> {
   }
 
   /**
-   * Sets the previous node.
+   * Sets the previous node. If the node is the head of the list, the previous node will be null.
    *
    * @param prev The node to be set as the previous node.
    */
