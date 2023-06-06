@@ -17,7 +17,7 @@ public class DNode<T> extends Node<T> {
     return prev;
   }
 
-  public void setPrev(Node<T> prev) {
+  public void setPrev(DNode<T> prev) {
     this.prev = prev;
   }
 }

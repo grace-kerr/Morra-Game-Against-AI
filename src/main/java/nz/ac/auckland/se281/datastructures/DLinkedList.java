@@ -10,7 +10,7 @@ public class DLinkedList<T> extends LinkedList<T> {
 
   @Override
   public void prepend(T data) {
-    Node<T> newNode = new Node<>(data);
+    DNode<T> newNode = new DNode<>(data);
     if (isEmpty()) {
       head = newNode;
       tail = newNode;
@@ -24,7 +24,7 @@ public class DLinkedList<T> extends LinkedList<T> {
 
   @Override
   public void add(T data) {
-    Node<T> newNode = new Node<>(data);
+    DNode<T> newNode = new DNode<>(data);
     if (isEmpty()) {
       head = newNode;
       tail = newNode;
@@ -47,7 +47,7 @@ public class DLinkedList<T> extends LinkedList<T> {
       return;
     }
 
-    Node<T> newNode = new Node<>(data);
+    DNode<T> newNode = new DNode<>(data);
     if (index == 0) {
       newNode.setNext(head);
       head.setPrev(newNode);

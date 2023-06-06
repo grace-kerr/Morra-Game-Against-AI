@@ -3,7 +3,7 @@ package nz.ac.auckland.se281.datastructures;
 public class Node<T> {
   protected T value;
   protected Node<T> next;
-  protected Node<T> prev;
+protected Node<T> prev;
 
   // constructor
   public Node() {}
