@@ -41,7 +41,6 @@ public class Graph<T extends Comparable<T>> {
    * @return the set of root vertices in the graph
    */
   public Set<T> getRoots() {
-    // Set<T> roots = new HashSet<>();
     Set<T> roots = new TreeSet<>();
 
     for (T vertex : vertices) {
@@ -56,14 +55,6 @@ public class Graph<T extends Comparable<T>> {
         roots.add(minimumVertex);
       }
     }
-
-    // orderSet(roots);
-    // Convert rootsSet to a SortedSet using your orderSet method
-
-    // int = Integer.parseInt(T.toString())
-
-    // sortedRootsSet.comparator();
-    // T = (T)(Object)int
 
     return orderRoots(roots);
   }
@@ -462,8 +453,6 @@ public class Graph<T extends Comparable<T>> {
       return visited;
     }
 
-    // Set<T> orderedRoots = orderRoots(roots);
-
     for (T root : roots) {
       if (!visited.contains(root)) {
         stack.push(root);
@@ -476,7 +465,7 @@ public class Graph<T extends Comparable<T>> {
             visited.add(currentVertex);
 
             Set<T> neighbours = getNeighbours(currentVertex);
-            List<T> orderedNeighbours = orderSet(neighbours);
+            List<T> orderedNeighbours = new ArrayList<>(neighbours);
 
             // Adding the ordered neighbours in reverse order to implement stack correctly
             for (int i = orderedNeighbours.size() - 1; i >= 0; i--) {
