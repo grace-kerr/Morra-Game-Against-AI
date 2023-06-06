@@ -20,6 +20,12 @@ public class Graph<T extends Comparable<T>> {
 
   // private Map<T, LinkedList<Edge<T>>> adjacencyMap;
 
+  /**
+   * Constructs a graph with the given vertices and edges.
+   *
+   * @param vertices the set of vertices to initialise the graph with
+   * @param edges the set of edges to initialise the graph with
+   */
   public Graph(Set<T> verticies, Set<Edge<T>> edges) {
     // initialize the graph with the given verticies and edges
     this.vertices = verticies;
@@ -38,6 +44,13 @@ public class Graph<T extends Comparable<T>> {
     // }
   }
 
+  /**
+   * Retrieves the set of root vertices in the graph. A root vertex is a vertex that has no incoming
+   * edges but has at least one outgoing edge. If a vertex is part of an equivalence class, the
+   * vertex with the lowest value is considered a root.
+   *
+   * @return the set of root vertices in the graph
+   */
   public Set<T> getRoots() {
     Set<T> roots = new HashSet<>();
 
@@ -57,6 +70,13 @@ public class Graph<T extends Comparable<T>> {
     return roots;
   }
 
+  /**
+   * Retrieves the in-degree of the inputted vertex in the graph. The in-degree of a vertex is the
+   * number of edges incoming to that vertex.
+   *
+   * @param vertex the vertex to calculate the in-degree for
+   * @return the in-degree of the inputted vertex
+   */
   private int getInDegree(T vertex) {
     int inDegree = 0;
 
@@ -71,6 +91,13 @@ public class Graph<T extends Comparable<T>> {
     return inDegree;
   }
 
+  /**
+   * Retrieves the out-degree of the inputted vertex in the graph. The out-degree of a vertex is the
+   * number of edges outgoing from that vertex.
+   *
+   * @param vertex the vertex to calculate the out-degree for
+   * @return the out-degree of the specified vertex
+   */
   private int getOutDegree(T vertex) {
     int outDegree = 0;
 
@@ -85,11 +112,26 @@ public class Graph<T extends Comparable<T>> {
     return outDegree;
   }
 
+  /**
+   * Finds and returns the minimum vertex in the given equivalence class. The vertex with the lowest
+   * value is determined based on the ordering of the vertices in the equivalence class.
+   *
+   * @param equivalenceClass the set of vertices representing an equivalence class
+   * @return the vertex (with the lowest value) in the equivalence class, or null if the equivalence
+   *     class is empty
+   */
   private T findMinimumVertex(Set<T> equivalenceClass) {
     ArrayList<T> orderedList = orderSet(equivalenceClass);
     return orderedList.isEmpty() ? null : orderedList.get(0);
   }
 
+  /**
+   * Orders the elements of the inputted set and returns them as an ArrayList.
+   *
+   * @param unorderedSet the set of elements to be ordered
+   * @param <T> the type of elements in the set and list
+   * @return an ArrayList containing the ordered elements from the set
+   */
   private ArrayList<T> orderSet(Set<T> unorderedSet) {
     ArrayList<T> orderedList = new ArrayList<>(unorderedSet);
     Collections.sort(orderedList);
@@ -97,6 +139,11 @@ public class Graph<T extends Comparable<T>> {
     return orderedList;
   }
 
+  /**
+   * Checks if the graph is reflexive.
+   *
+   * @return {@code true} if the graph is reflexive, {@code false} otherwise
+   */
   public boolean isReflexive() {
     for (T vertex : vertices) {
       boolean hasSelfLoop = false;
@@ -117,6 +164,15 @@ public class Graph<T extends Comparable<T>> {
     return true;
   }
 
+  /**
+   * Compares two edges to check if they have the same source and destination vertices. If so, they
+   * would be considered equal.
+   *
+   * @param edge1 the first edge to compare
+   * @param edge2 the second edge to compare
+   * @return {@code true} if the edges have the same source and destination vertices, {@code false}
+   *     otherwise
+   */
   public boolean compareEdges(Edge<T> edge1, Edge<T> edge2) {
     T source1 = edge1.getSource();
     T destination1 = edge1.getDestination();
@@ -126,6 +182,13 @@ public class Graph<T extends Comparable<T>> {
     return source1.equals(source2) && destination1.equals(destination2);
   }
 
+  /**
+   * Checks if an edge is contained in a set of edges.
+   *
+   * @param edge the edge to look for
+   * @param edgeSet the set of edges which we are looking in
+   * @return {@code true} if the edge is found in the set, {@code false} otherwise
+   */
   public boolean isEdgeInSet(Edge<T> edge, Set<Edge<T>> edgeSet) {
     for (Edge<T> e : edgeSet) {
       if (compareEdges(e, edge)) {
@@ -135,6 +198,11 @@ public class Graph<T extends Comparable<T>> {
     return false;
   }
 
+  /**
+   * Checks if the graph is symmetric.
+   *
+   * @return {@code true} if the graph is symmetric, {@code false} otherwise
+   */
   public boolean isSymmetric() {
     for (Edge<T> edge : edges) {
       T source = edge.getSource();
@@ -168,6 +236,11 @@ public class Graph<T extends Comparable<T>> {
     return true;
   }
 
+  /**
+   * Checks if the graph is transitive.
+   *
+   * @return {@code true} if the graph is transitive, {@code false} otherwise
+   */
   public boolean isTransitive() {
     // iterate through all edges
     for (Edge<T> edge1 : edges) {
@@ -190,6 +263,11 @@ public class Graph<T extends Comparable<T>> {
     return true;
   }
 
+  /**
+   * Checks if the graph is antisymmetric.
+   *
+   * @return {@code true} if the graph is antisymmetric, {@code false} otherwise
+   */
   public boolean isAntiSymmetric() {
     // iterate through all edges
     for (Edge<T> edge1 : edges) {
@@ -211,10 +289,21 @@ public class Graph<T extends Comparable<T>> {
     return true;
   }
 
+  /**
+   * Checks if the graph represents an equivalence relation.
+   *
+   * @return {@code true} if the graph is an equivalence relation, {@code false} otherwise
+   */
   public boolean isEquivalence() {
     return isReflexive() && isSymmetric() && isTransitive();
   }
 
+  /**
+   * Retrieves the equivalence class for an inputted vertex in the graph.
+   *
+   * @param vertex the vertex of which we are looking for the equivalence class
+   * @return a set containing the vertices in the equivalence class of the inputted vertex
+   */
   public Set<T> getEquivalenceClass(T vertex) {
     Set<T> equivalenceClass = new HashSet<>();
 
@@ -238,6 +327,11 @@ public class Graph<T extends Comparable<T>> {
     return equivalenceClass;
   }
 
+  /**
+   * Retrieves the lowest value from the set of roots in the graph.
+   *
+   * @return the lowest root value, or {@code Integer.MAX_VALUE} if there are no roots
+   */
   public int getLowestRootValue() {
     Set<T> roots = getRoots();
 
@@ -253,6 +347,11 @@ public class Graph<T extends Comparable<T>> {
     return lowestValue;
   }
 
+  /**
+   * Performs an iterative breadth-first search traversal of the graph.
+   *
+   * @return a list containing the vertices in the order they were visited during the IBFS traversal
+   */
   public List<T> iterativeBreadthFirstSearch() {
     Set<T> visited = new HashSet<>();
     List<T> result = new ArrayList<>();
@@ -287,6 +386,12 @@ public class Graph<T extends Comparable<T>> {
     return result;
   }
 
+  /**
+   * Retrieves a set of vertices that neighbour an inputted vertex in the graph.
+   *
+   * @param vertex the vertex that we are looking for its neighbours
+   * @return a set containing the neighbouring vertices of the inputted vertex
+   */
   private Set<T> getNeighbours(T vertex) {
     Set<T> neighbours = new HashSet<>();
 
@@ -300,11 +405,18 @@ public class Graph<T extends Comparable<T>> {
     return neighbours;
   }
 
+  /**
+   * Performs an iterative depth-first search traversal of the graph.
+   *
+   * @return a list containing the vertices in the order they were visited during the IDFS traversal
+   */
   public List<T> iterativeDepthFirstSearch() {
     List<T> visited = new ArrayList<>();
     LinkedStack<T> stack = new LinkedStack<>();
 
     Set<T> roots = getRoots();
+
+    // If there are no roots, return empty vistied list
     if (roots.isEmpty()) {
       return visited;
     }
@@ -315,6 +427,7 @@ public class Graph<T extends Comparable<T>> {
       if (!visited.contains(root)) {
         stack.push(root);
 
+        // iterative loop for DFS traversal using a stack
         while (!stack.isEmpty()) {
           T currentVertex = stack.pop();
 
@@ -324,6 +437,7 @@ public class Graph<T extends Comparable<T>> {
             Set<T> neighbours = getNeighbours(currentVertex);
             List<T> orderedNeighbours = orderSet(neighbours);
 
+            // Adding the ordered neighbours in reverse order to implement stack correctly
             for (int i = orderedNeighbours.size() - 1; i >= 0; i--) {
               T neighbour = orderedNeighbours.get(i);
               stack.push(neighbour);
@@ -336,12 +450,19 @@ public class Graph<T extends Comparable<T>> {
     return visited;
   }
 
+  /**
+   * Performs a recursive breadth-first search traversal of the graph.
+   *
+   * @return a list containing the vertices in the order they were visited during the RBFS traversal
+   */
   public List<T> recursiveBreadthFirstSearch() {
     Set<T> visited = new HashSet<>();
     List<T> result = new ArrayList<>();
     Queue<T> queue = new Queue<>();
 
     Set<T> roots = getRoots();
+
+    // If there are no roots, return empty results list
     if (roots.isEmpty()) {
       return result;
     }
@@ -352,6 +473,8 @@ public class Graph<T extends Comparable<T>> {
       if (!visited.contains(root)) {
         queue.enqueue(root);
         visited.add(root);
+
+        // Recursive call to perform BFS traversal from the current root
         recursiveBFS(queue, visited, result);
       }
     }
@@ -359,7 +482,16 @@ public class Graph<T extends Comparable<T>> {
     return result;
   }
 
+  /**
+   * Performs a recursive breadth-first search (BFS) traversal starting from the given queue.
+   *
+   * @param queue The queue containing the vertices to be traversed.
+   * @param visited The set of vertices that have been visited.
+   * @param result The list to store the traversed vertices in the order of traversal.
+   * @param <T> The type of vertices being traversed.
+   */
   private void recursiveBFS(Queue<T> queue, Set<T> visited, List<T> result) {
+    // The base case: If the queue is empty, the traversal is complete
     if (queue.isEmpty()) {
       return;
     }
@@ -375,9 +507,16 @@ public class Graph<T extends Comparable<T>> {
       }
     }
 
+    // Recursive call to continue BFS on the remaining vertices in the queue
     recursiveBFS(queue, visited, result);
   }
 
+  /**
+   * Performs a recursive depth-first search (DFS) traversal starting from the roots of the graph.
+   * Returns a list of visited vertices in the order they were visited.
+   *
+   * @return The list of visited vertices in the order of traversal.
+   */
   public List<T> recursiveDepthFirstSearch() {
     List<T> visited = new ArrayList<>();
     Set<T> roots = getRoots();
@@ -393,6 +532,13 @@ public class Graph<T extends Comparable<T>> {
     return visited;
   }
 
+  /**
+   * Performs a recursive depth-first search (DFS) traversal starting from the given vertex. Adds
+   * visited vertices to the provided list in the order they are visited.
+   *
+   * @param vertex The starting vertex for the DFS traversal.
+   * @param visited The list to store the visited vertices in the order of traversal.
+   */
   private void recursiveDFS(T vertex, List<T> visited) {
     visited.add(vertex);
 
