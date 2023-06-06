@@ -305,7 +305,7 @@ public class Graph<T extends Comparable<T>> {
 
   public List<T> iterativeDepthFirstSearch() {
     List<T> visited = new ArrayList<>();
-    Stack<T> stack = new LinkedListStack<>();
+    LinkedStack<T> stack = new LinkedStack<>();
 
     Set<T> roots = getRoots();
     if (roots.isEmpty()) {
@@ -327,6 +327,7 @@ public class Graph<T extends Comparable<T>> {
     visited.add(currentVertex);
 
     while (!(stack.size() == 0)) {
+      currentVertex = stack.peek();
       currentVertex = stack.pop();
 
       Set<T> neighbours = getNeighbours(currentVertex);
@@ -339,7 +340,6 @@ public class Graph<T extends Comparable<T>> {
           visited.add(neighbour);
         }
       }
-      currentVertex = stack.peek();
     }
 
     return visited;
