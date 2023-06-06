@@ -394,23 +394,23 @@ public class Graph<T extends Comparable<T>> {
       return result;
     }
 
-    List<T> orderedRoots = orderSet(roots);
+    List<T> orderedRoots = new ArrayList<>(roots);
 
     for (T root : orderedRoots) {
       queue.enqueue(root);
       visited.add(root);
-    }
 
-    while (!queue.isEmpty()) {
-      T currentVertex = queue.dequeue();
-      result.add(currentVertex);
+      while (!queue.isEmpty()) {
+        T currentVertex = queue.dequeue();
+        result.add(currentVertex);
 
-      // look at all connect vertices to the current vertex
-      Set<T> neighbours = getNeighbours(currentVertex);
-      for (T neighbour : neighbours) {
-        if (!visited.contains(neighbour)) {
-          queue.enqueue(neighbour);
-          visited.add(neighbour);
+        // look at all connect vertices to the current vertex
+        Set<T> neighbours = getNeighbours(currentVertex);
+        for (T neighbour : neighbours) {
+          if (!visited.contains(neighbour)) {
+            queue.enqueue(neighbour);
+            visited.add(neighbour);
+          }
         }
       }
     }
