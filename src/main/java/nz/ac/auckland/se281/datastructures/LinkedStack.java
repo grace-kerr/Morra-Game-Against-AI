@@ -39,6 +39,7 @@ public class LinkedStack<T> {
     if (isEmpty()) {
       throw new EmptyStackException();
     }
+    // Returns the element at the top of the stack after removing it from the stack
     T result = top.getData();
     top = top.getNext();
     length--;

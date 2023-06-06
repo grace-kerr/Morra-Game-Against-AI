@@ -12,6 +12,12 @@ public class Queue<T> {
     list = new DoubleLinkedList<>();
   }
 
+  /**
+   * Adds the inputted element to the end of the queue. The element will be added after all the
+   * others.
+   *
+   * @param data the element to be added to the queue
+   */
   public void enqueue(T data) {
     list.add(data);
   }
@@ -46,10 +52,20 @@ public class Queue<T> {
     return list.get(0);
   }
 
+  /**
+   * Returns the number of elements in the queue. This method is O(1) time complexity.
+   *
+   * @return the number of elements in the queue
+   */
   public int size() {
     return list.size();
   }
 
+  /**
+   * Checks if the queue is empty. This method is O(1) time complexity.
+   *
+   * @return true if the queue is empty, false otherwise
+   */
   public boolean isEmpty() {
     return list.isEmpty();
   }

@@ -22,7 +22,7 @@ public interface Stack<T> {
   T pop();
 
   /**
-   * Returns the item at the top of the stack without removing it.
+   * Returns the item at the top of the stack and it doesn't remove it.
    *
    * @return The item at the top of the stack.
    * @throws IllegalStateException If the stack is empty.
@@ -30,7 +30,7 @@ public interface Stack<T> {
   T peek();
 
   /**
-   * Checks if the stack is empty.
+   * Checks if the stack is empty, this is a true or false scenario.
    *
    * @return {@code true} if the stack is empty, {@code false} otherwise.
    */

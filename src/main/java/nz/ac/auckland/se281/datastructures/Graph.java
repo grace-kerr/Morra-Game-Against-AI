@@ -28,13 +28,13 @@ public class Graph<T extends Comparable<T>> {
    * @param edges the set of edges to initialise the graph with
    */
   public Graph(Set<T> vertices, Set<Edge<T>> edges) {
-    // initialize the graph with the given verticies and edges
+    // initialize the graph with the given vertcies and edges
     this.vertices = vertices;
     this.edges = edges;
   }
 
   /**
-   * Retrieves the set of root vertices in the graph. A root vertex is a vertex that has no incoming
+   * Retrieves the graph's set of root vertices. A root vertex is a vertex that has no incoming
    * edges but has at least one outgoing edge. If a vertex is part of an equivalence class, the
    * vertex with the lowest value is considered a root.
    *

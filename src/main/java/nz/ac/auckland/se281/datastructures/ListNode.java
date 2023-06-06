@@ -44,7 +44,7 @@ public class ListNode<T> {
   }
 
   /**
-   * Returns the data stored in this node.
+   * Returns the data stored in this node. The data is of type T.
    *
    * @return The data stored in the node.
    */
@@ -53,12 +53,12 @@ public class ListNode<T> {
   }
 
   /**
-   * Sets the data stored in this node.
+   * Sets the data stored in this node. The data is of type T.
    *
-   * @param elem The data to be set in the node.
+   * @param value The data to be set in the node.
    */
-  public void setData(T elem) {
-    data = elem;
+  public void setData(T value) {
+    data = value;
   }
 
   /**
