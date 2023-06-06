@@ -314,38 +314,27 @@ public class Graph<T extends Comparable<T>> {
 
     List<T> orderedRoots = orderSet(roots);
 
-    // stack.push(orderedRoots.get(0));
+    for (T root : orderedRoots) {
+      if (!visited.contains(root)) {
+        stack.push(root);
 
-    // for (int i = orderedRoots.size() - 1; i >= 0; i--) {
-    //   // stack.push(orderedRoots.get(i));
-    //   stack.push(orderedRoots.get(i));
-    //   break;
-    // }
+        while (!stack.isEmpty()) {
+          T currentVertex = stack.pop();
 
-    T currentVertex = orderedRoots.get(0);
-    stack.push(currentVertex);
-    //visited.add(currentVertex);
+          if (!visited.contains(currentVertex)) {
+            visited.add(currentVertex);
 
-    while (!(stack.size() == 0)) {
-      //currentVertex = stack.peek();
-      currentVertex = stack.pop();
+            Set<T> neighbours = getNeighbours(currentVertex);
+            List<T> orderedNeighbours = orderSet(neighbours);
 
-      if (!visited.contains(currentVertex)) {
-        visited.add(currentVertex);
-
-      Set<T> neighbours = getNeighbours(currentVertex);
-      List<T> orderedNeighbours = orderSet(neighbours);
-
-      for (int i = orderedNeighbours.size() - 1; i >= 0; i--) {
-        T neighbour = orderedNeighbours.get(i);
-        if (!visited.contains(neighbour)) {
-          stack.push(neighbour);
-          //visited.add(neighbour);
+            for (int i = orderedNeighbours.size() - 1; i >= 0; i--) {
+              T neighbour = orderedNeighbours.get(i);
+              stack.push(neighbour);
+            }
+          }
         }
       }
-     
     }
-  }
 
     return visited;
   }
