@@ -23,7 +23,7 @@ public class DoubleLinkedList<T> extends LinkedList<T> {
    */
   @Override
   public void prepend(T data) {
-    DoubleNode<T> newNode = new DoubleNode<>(data);
+    Node<T> newNode = new Node<>(data);
     if (isEmpty()) {
       // If the list is empty, set the new node as both the head and the tail
       head = newNode;
@@ -46,7 +46,7 @@ public class DoubleLinkedList<T> extends LinkedList<T> {
    */
   @Override
   public void add(T data) {
-    DoubleNode<T> newNode = new DoubleNode<>(data);
+    Node<T> newNode = new Node<>(data);
     if (isEmpty()) {
       // Adding to an empty list
       head = newNode;
@@ -79,7 +79,7 @@ public class DoubleLinkedList<T> extends LinkedList<T> {
       return;
     }
 
-    DoubleNode<T> newNode = new DoubleNode<>(data);
+    Node<T> newNode = new Node<>(data);
     // Inserting at the beginning of the list
     if (index == 0) {
       newNode.setNext(head);
