@@ -324,11 +324,14 @@ public class Graph<T extends Comparable<T>> {
 
     T currentVertex = orderedRoots.get(0);
     stack.push(currentVertex);
-    visited.add(currentVertex);
+    //visited.add(currentVertex);
 
     while (!(stack.size() == 0)) {
-      currentVertex = stack.peek();
+      //currentVertex = stack.peek();
       currentVertex = stack.pop();
+
+      if (!visited.contains(currentVertex)) {
+        visited.add(currentVertex);
 
       Set<T> neighbours = getNeighbours(currentVertex);
       List<T> orderedNeighbours = orderSet(neighbours);
@@ -337,10 +340,12 @@ public class Graph<T extends Comparable<T>> {
         T neighbour = orderedNeighbours.get(i);
         if (!visited.contains(neighbour)) {
           stack.push(neighbour);
-          visited.add(neighbour);
+          //visited.add(neighbour);
         }
       }
+     
     }
+  }
 
     return visited;
   }
