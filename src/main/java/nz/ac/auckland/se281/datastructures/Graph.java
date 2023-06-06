@@ -434,7 +434,7 @@ public class Graph<T extends Comparable<T>> {
    * @return a set containing the neighbouring vertices of the inputted vertex
    */
   private Set<T> getNeighbours(T vertex) {
-    Set<T> neighbours = new HashSet<>();
+    Set<T> neighbours = new TreeSet<>();
 
     // look at all edges and add the destination of the edge if the source is the vertex inputted
     for (Edge<T> edge : edges) {
@@ -443,7 +443,7 @@ public class Graph<T extends Comparable<T>> {
       }
     }
 
-    return neighbours;
+    return orderRoots(neighbours);
   }
 
   /**
@@ -462,9 +462,9 @@ public class Graph<T extends Comparable<T>> {
       return visited;
     }
 
-    Set<T> orderedRoots = orderRoots(roots);
+    // Set<T> orderedRoots = orderRoots(roots);
 
-    for (T root : orderedRoots) {
+    for (T root : roots) {
       if (!visited.contains(root)) {
         stack.push(root);
 
