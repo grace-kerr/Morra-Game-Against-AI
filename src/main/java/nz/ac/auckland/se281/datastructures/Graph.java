@@ -66,7 +66,7 @@ public class Graph<T extends Comparable<T>> {
     // sortedRootsSet.comparator();
     // T = (T)(Object)int
 
-    // return roots.
+    return roots;
 
     // return new TreeSet<>(roots);
   }
