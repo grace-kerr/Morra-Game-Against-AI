@@ -1,8 +1,7 @@
 package nz.ac.auckland.se281.datastructures;
 
 /**
- * A list interface. Lists typically allow elements to be added, inserted, and removed at different
- * positions.
+ * A list interface. Lists allow elements to be added, inserted, and removed at different indices.
  *
  * @param <T> the type of elements in the list
  */
