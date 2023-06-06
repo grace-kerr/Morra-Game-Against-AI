@@ -71,18 +71,18 @@ public class Graph<T extends Comparable<T>> {
     // return new TreeSet<>(roots);
   }
 
-  public <T extends Comparable<T>> Set<Integer> orderSetToInt(Set<T> inputSet) {
-    // Create a new set to store the ordered integers
-    Set<Integer> orderedSet = new TreeSet<>();
+  // public <T extends Comparable<T>> Set<Integer> orderSetToInt(Set<T> inputSet) {
+  //   // Create a new set to store the ordered integers
+  //   Set<Integer> orderedSet = new TreeSet<>();
 
-    // Iterate over the input set and cast each element to Integer
-    for (T element : inputSet) {
-      Integer intValue = (Integer) element;
-      orderedSet.add(intValue);
-    }
+  //   // Iterate over the input set and cast each element to Integer
+  //   for (T element : inputSet) {
+  //     Integer intValue = (Integer) element;
+  //     orderedSet.add(intValue);
+  //   }
 
-    return orderedSet;
-  }
+  //   return orderedSet;
+  // }
 
   /**
    * Orders the elements of the inputted set and returns them as an ArrayList.
