@@ -20,7 +20,6 @@ public class LinkedList<T> implements List<T> {
    * Adds a node with the inputted data at the beginning of the list.
    *
    * @param data The data to be prepended, of type T.
-   * @return void
    */
   public void prepend(T data) {
     // Note -- works even if list is empty
@@ -33,7 +32,6 @@ public class LinkedList<T> implements List<T> {
    * Adds a new node with the inputted data to the end of the list.
    *
    * @param data The data to be added, of type T.
-   * @return void
    */
   public void add(T data) {
     Node<T> newNode = new Node<>(data);
@@ -85,7 +83,6 @@ public class LinkedList<T> implements List<T> {
    *
    * @param index The index at which the new node should be inserted.
    * @param data The value to be inserted.
-   * @return void
    * @throws IndexOutOfBoundsException If the index is out of bounds.
    */
   public void insert(int index, T data) {
@@ -122,8 +119,7 @@ public class LinkedList<T> implements List<T> {
   /**
    * This method removes a node at a given position.
    *
-   * @param index The index of the node that will be removed.
-   * @return void
+   * @param index The index of the node that will be removed.\
    */
   public void remove(int index) {
     // first index is 0

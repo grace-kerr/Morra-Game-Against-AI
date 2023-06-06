@@ -54,7 +54,7 @@ public class Node<T> {
   }
 
   /**
-   * Returns the next node.
+   * Returns the next node, of type T.
    *
    * @return The next node.
    */

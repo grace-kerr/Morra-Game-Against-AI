@@ -1,5 +1,10 @@
 package nz.ac.auckland.se281.datastructures;
 
+/**
+ * A generic queue implementation using a double-linked list.
+ *
+ * @param <T> the type of elements stored in the queue
+ */
 public class Queue<T> {
   private DoubleLinkedList<T> list;
 

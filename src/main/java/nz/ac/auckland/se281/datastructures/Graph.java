@@ -3,10 +3,8 @@ package nz.ac.auckland.se281.datastructures;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.SortedSet;
 import java.util.TreeSet;
 
 /**
@@ -45,7 +43,7 @@ public class Graph<T extends Comparable<T>> {
    */
   public Set<T> getRoots() {
     // Set<T> roots = new HashSet<>();
-    Set<T> roots = new LinkedHashSet<>();
+    Set<T> roots = new TreeSet<>();
 
     for (T vertex : vertices) {
       if (getInDegree(vertex) == 0 && getOutDegree(vertex) > 0) {
@@ -62,12 +60,42 @@ public class Graph<T extends Comparable<T>> {
 
     // orderSet(roots);
     // Convert rootsSet to a SortedSet using your orderSet method
-    ArrayList<T> orderedRoots = orderSet(roots);
-    SortedSet<T> sortedRootsSet = new TreeSet<>(orderedRoots);
 
-    return sortedRootsSet;
+    // int = Integer.parseInt(T.toString())
+
+    // sortedRootsSet.comparator();
+    // T = (T)(Object)int
+
+    // return roots.
 
     // return new TreeSet<>(roots);
+  }
+
+  public <T extends Comparable<T>> Set<Integer> orderSetToInt(Set<T> inputSet) {
+    // Create a new set to store the ordered integers
+    Set<Integer> orderedSet = new TreeSet<>();
+
+    // Iterate over the input set and cast each element to Integer
+    for (T element : inputSet) {
+      Integer intValue = (Integer) element;
+      orderedSet.add(intValue);
+    }
+
+    return orderedSet;
+  }
+
+  /**
+   * Orders the elements of the inputted set and returns them as an ArrayList.
+   *
+   * @param unorderedSet the set of elements to be ordered
+   * @param <T> the type of elements in the set and list
+   * @return an ArrayList containing the ordered elements from the set
+   */
+  private ArrayList<T> orderSet(Set<T> unorderedSet) {
+    ArrayList<T> orderedList = new ArrayList<>(unorderedSet);
+    Collections.sort(orderedList);
+
+    return orderedList;
   }
 
   /**
@@ -123,20 +151,6 @@ public class Graph<T extends Comparable<T>> {
   private T findMinimumVertex(Set<T> equivalenceClass) {
     ArrayList<T> orderedList = orderSet(equivalenceClass);
     return orderedList.isEmpty() ? null : orderedList.get(0);
-  }
-
-  /**
-   * Orders the elements of the inputted set and returns them as an ArrayList.
-   *
-   * @param unorderedSet the set of elements to be ordered
-   * @param <T> the type of elements in the set and list
-   * @return an ArrayList containing the ordered elements from the set
-   */
-  private ArrayList<T> orderSet(Set<T> unorderedSet) {
-    ArrayList<T> orderedList = new ArrayList<>(unorderedSet);
-    Collections.sort(orderedList);
-
-    return orderedList;
   }
 
   /**
