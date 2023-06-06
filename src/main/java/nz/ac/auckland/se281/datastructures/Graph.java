@@ -3,8 +3,11 @@ package nz.ac.auckland.se281.datastructures;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 /**
  * A graph that is composed of a set of verticies and edges.
@@ -17,6 +20,7 @@ public class Graph<T extends Comparable<T>> {
 
   private Set<T> vertices;
   private Set<Edge<T>> edges;
+
   // private Map<T, LinkedList<Edge<T>>> adjacencyMap;
 
   /**
@@ -40,7 +44,8 @@ public class Graph<T extends Comparable<T>> {
    * @return the set of root vertices in the graph
    */
   public Set<T> getRoots() {
-    Set<T> roots = new HashSet<>();
+    // Set<T> roots = new HashSet<>();
+    Set<T> roots = new LinkedHashSet<>();
 
     for (T vertex : vertices) {
       if (getInDegree(vertex) == 0 && getOutDegree(vertex) > 0) {
@@ -55,7 +60,14 @@ public class Graph<T extends Comparable<T>> {
       }
     }
 
-    return roots;
+    // orderSet(roots);
+    // Convert rootsSet to a SortedSet using your orderSet method
+    ArrayList<T> orderedRoots = orderSet(roots);
+    SortedSet<T> sortedRootsSet = new TreeSet<>(orderedRoots);
+
+    return sortedRootsSet;
+
+    // return new TreeSet<>(roots);
   }
 
   /**
