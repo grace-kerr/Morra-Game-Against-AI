@@ -497,9 +497,7 @@ public class Graph<T extends Comparable<T>> {
       return result;
     }
 
-    List<T> orderedRoots = orderSet(roots);
-
-    for (T root : orderedRoots) {
+    for (T root : roots) {
       if (!visited.contains(root)) {
         queue.enqueue(root);
         visited.add(root);
@@ -550,10 +548,9 @@ public class Graph<T extends Comparable<T>> {
   public List<T> recursiveDepthFirstSearch() {
     List<T> visited = new ArrayList<>();
     Set<T> roots = getRoots();
-    List<T> orderedRoots = orderSet(roots);
 
     // Perform recursive depth-first search for each ordered root
-    for (T root : orderedRoots) {
+    for (T root : roots) {
       if (!visited.contains(root)) {
         recursiveDepthFirstSearch(root, visited);
       }
@@ -573,7 +570,7 @@ public class Graph<T extends Comparable<T>> {
     visited.add(vertex);
 
     Set<T> neighbours = getNeighbours(vertex);
-    List<T> orderedNeighbours = orderSet(neighbours);
+    List<T> orderedNeighbours = new ArrayList<>(neighbours);
 
     // Recursively look at the neighbours, ordered, of the current vertex
     for (T neighbour : orderedNeighbours) {
