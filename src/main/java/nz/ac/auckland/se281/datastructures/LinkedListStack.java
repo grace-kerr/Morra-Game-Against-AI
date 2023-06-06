@@ -20,7 +20,7 @@ public class LinkedListStack<T> implements Stack<T> {
     }
     T item = stack.get(0);
     stack.remove(0);
-    size--;
+    // size--;
     return item;
   }
 

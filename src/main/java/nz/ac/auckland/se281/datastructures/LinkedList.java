@@ -62,7 +62,7 @@ public class LinkedList<T> implements List<T> {
    * @return the value at the position pos
    */
   public T get(int index) {
-    if (index < 0 || index >= size) {
+    if (index < 0 || index > size) {
       throw new IndexOutOfBoundsException("Invalid index");
     }
 
@@ -116,28 +116,44 @@ public class LinkedList<T> implements List<T> {
    * @return void
    */
   public void remove(int index) {
-    if (index < 0 || index >= size) {
-      throw new IndexOutOfBoundsException("Invalid index");
-    }
-
+    // first index is 0
     if (index == 0) {
-      head = head.getNext();
-      if (head != null) {
-        head.setPrev(null);
-      }
+      head = head.next;
     } else {
+      // traverse to the node before the one we want to remove
       Node<T> current = head;
       for (int i = 0; i < index - 1; i++) {
-        current = current.getNext();
+        current = current.next;
       }
-      Node<T> removedNode = current.getNext();
-      current.setNext(removedNode.getNext());
-      if (current.getNext() != null) {
-        current.getNext().setPrev(current);
-      }
+
+      // change its next pointer to skip past the offending node
+      current.next = current.next.next;
     }
 
-    size--;
+
+    
+    // if (index < 0 || index > size) {
+    //   throw new IndexOutOfBoundsException("Invalid index");
+    // }
+
+    // if (index == 0) {
+    //   head = head.getNext();
+    //   if (head != null) {
+    //     head.setPrev(null);
+    //   }
+    // } else {
+    //   Node<T> current = head;
+    //   for (int i = 0; i < index - 1; i++) {
+    //     current = current.getNext();
+    //   }
+    //   Node<T> removedNode = current.getNext();
+    //   current.setNext(removedNode.getNext());
+    //   if (current.getNext() != null) {
+    //     current.getNext().setPrev(current);
+    //   }
+    // }
+
+    // size--;
   }
 
   /**

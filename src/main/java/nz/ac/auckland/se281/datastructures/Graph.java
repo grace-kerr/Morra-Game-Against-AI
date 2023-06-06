@@ -305,7 +305,7 @@ public class Graph<T extends Comparable<T>> {
 
   public List<T> iterativeDepthFirstSearch() {
     List<T> visited = new ArrayList<>();
-    Stack<T> stack = new Stack<>();
+    Stack<T> stack = new LinkedListStack<>();
 
     Set<T> roots = getRoots();
     if (roots.isEmpty()) {
