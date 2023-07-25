@@ -1,5 +1,5 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/EoVwWP_A)
-# Assignment 3
+# Morra Game Against AI
 
-You will find instructions for this assignment on the course website.
+The Morra game is a hand-gesture guessing game where two players simultaneously reveal a certain number of fingers, and the one who correctly predicts the total sum wins.
 
+It is User vs. AI. The AI employs different strategies depending on the difficulty level. I implemented this using various object-oriented design patterns.
